@@ -555,8 +555,8 @@ const Registration: React.FC = () => {
                         <Check size={32} />
                       </div>
                       <div>
-                        <h3 className="text-xl md:text-2xl font-bold serif mb-2">Registration Confirmed</h3>
-                        <p className="text-[10px] uppercase tracking-widest text-[#9AA4B2]">Standard Scientific Curriculum</p>
+                        <h3 className="text-xl md:text-2xl font-bold serif mb-2">payment pending</h3>
+                        <p className="text-[10px] uppercase tracking-widest text-[#9AA4B2]">proceed for payment</p>
                       </div>
                       <div className="max-w-md bg-[#0B0F14] border border-[#1F2937] p-8 rounded-[32px] w-full">
                         <p className="text-sm text-[#E6EAF0] mb-4">You have selected the <strong>{formData.category}</strong> category. This includes full access to all scientific sessions, halls, and networking areas.</p>
