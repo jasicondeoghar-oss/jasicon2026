@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://jasicondeoghar-oss.github.io/jasicon2026",
+  "homepage": ".",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

@@ -125,9 +125,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
     };
 
+    if (loading) {
+        return (
+            <div className="min-h-screen flex flex-col items-center justify-center bg-[#0B0F14] text-[#C9A24D]">
+                <div className="w-16 h-16 border-4 border-[#C9A24D] border-t-transparent rounded-full animate-spin mb-4"></div>
+                <div className="text-xl font-medium serif animate-pulse">Initializing Jasicon 2026...</div>
+            </div>
+        );
+    }
+
     return (
         <AuthContext.Provider value={{ user, loading, login, googleLogin, signup, logout, resetPassword, completeRegistration }}>
-            {!loading && children}
+            {children}
         </AuthContext.Provider>
     );
 };
