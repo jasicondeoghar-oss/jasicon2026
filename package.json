@@ -1,5 +1,5 @@
 {
-  "name": "docon-2026---national-medical-conference",
+  "name": "jasicon-2026---national-medical-conference",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,6 +12,7 @@
     "deploy": "node deploy.js"
   },
   "dependencies": {
+    "firebase": "^12.9.0",
     "html-to-image": "^1.11.11",
     "jspdf": "^2.5.1",
     "lucide-react": "^0.563.0",

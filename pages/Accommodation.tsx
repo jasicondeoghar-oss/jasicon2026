@@ -59,10 +59,10 @@ const Accommodation: React.FC = () => {
         {HOTELS.map((hotel) => (
           <div key={hotel.id} className="glass-card rounded-[40px] overflow-hidden group flex flex-col md:flex-row border border-[#1F2937]">
             <div className="md:w-1/2 relative h-64 md:h-auto overflow-hidden">
-              <img 
-                src={hotel.img} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0" 
-                alt={hotel.name} 
+              <img
+                src={hotel.img}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0"
+                alt={hotel.name}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F14] to-transparent opacity-60"></div>
             </div>
@@ -79,7 +79,7 @@ const Accommodation: React.FC = () => {
                   <span>{hotel.location}</span>
                 </div>
                 <p className="text-[#C9A24D] text-[10px] uppercase tracking-widest font-bold mt-2">{hotel.distance}</p>
-                
+
                 <div className="flex flex-wrap gap-2 mt-6">
                   {hotel.amenities.map(a => (
                     <span key={a} className="bg-white/5 border border-[#1F2937] text-[10px] text-[#9AA4B2] px-3 py-1 rounded-full">{a}</span>
@@ -122,7 +122,7 @@ const Accommodation: React.FC = () => {
               <Shield size={24} />
             </div>
             <h4 className="font-bold serif mb-2">Concierge Desk</h4>
-            <p className="text-sm text-[#9AA4B2]">Dedicated DOCON 2026 concierge desk at all partner hotels.</p>
+            <p className="text-sm text-[#9AA4B2]">Dedicated JASICON 2026 concierge desk at all partner hotels.</p>
           </div>
         </div>
       </div>

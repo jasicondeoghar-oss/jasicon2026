@@ -25,11 +25,11 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center space-x-3">
                 <Phone size={18} className="text-[#C9A24D] shrink-0" />
-                <span>9431361778, 9973765585</span>
+                <span>9334223606, 9334386644</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail size={18} className="text-[#C9A24D] shrink-0" />
-                <span>jasicon2026@gmail.com</span>
+                <span>jasicondeoghar@gmail.com</span>
               </li>
             </ul>
           </div>
@@ -39,7 +39,6 @@ const Footer: React.FC = () => {
             <ul className="space-y-3 text-[#9AA4B2] text-sm">
               <li><Link to="/program" className="hover:text-[#C9A24D]">Scientific Program</Link></li>
               <li><Link to="/registration" className="hover:text-[#C9A24D]">Registration Guidelines</Link></li>
-              <li><Link to="/downloads" className="hover:text-[#C9A24D]">Abstract Submission</Link></li>
               <li><Link to="/committee" className="hover:text-[#C9A24D]">Organizing Committee</Link></li>
               <li><Link to="/contact" className="hover:text-[#C9A24D]">Exhibition & Sponsorship</Link></li>
             </ul>

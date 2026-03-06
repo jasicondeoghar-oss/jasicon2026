@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../App';
+import { useAuth } from '../context/AuthContext';
 import { getAssetPath } from '../constants';
 import { Menu, X, User as UserIcon, LogOut, ChevronDown, LayoutDashboard, LogIn } from 'lucide-react';
 
@@ -53,6 +53,7 @@ const Navbar: React.FC = () => {
     { name: 'About', path: '/about' },
     { name: 'Committee', path: '/committee' },
     { name: 'Program', path: '/program' },
+    { name: 'Gallery', path: '/gallery' },
     { name: 'Registration', path: '/registration' },
     { name: 'Contact', path: '/contact' },
   ];

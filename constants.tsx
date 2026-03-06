@@ -2,6 +2,11 @@
 import React from 'react';
 import { FacultyMember, CommitteeMember, ProgramSession, Workshop, ExtendedCommitteeSection } from './types';
 
+export const ADMIN_EMAILS = [
+  "jasicondeoghar@gmail.com",
+  "digixea1@gmail.com"
+];
+
 export const getAssetPath = (path: string) => {
   return `${import.meta.env.BASE_URL}${path.startsWith('/') ? path.slice(1) : path}`;
 };
@@ -20,20 +25,25 @@ export const COMMITTEE: CommitteeMember[] = [
   { id: 'c1', name: 'Dr. Jugal Kishor Choudhary', role: 'Chairman', imageUrl: getAssetPath('/assets/Jugal_kishore.png') },
   { id: 'c2', name: 'Dr. Kumar Gaurav', role: 'Secretary', imageUrl: getAssetPath('/assets/rajesh.png') },
   { id: 'c3', name: 'Dr. Vijay Kumar', role: 'Treasurer', imageUrl: getAssetPath('/assets/Vijay_kumar.png') },
-  //   { id: 'c4', name: 'Dr. Jugal Kishore Choudhary', role: 'Organizing Chairman', imageUrl: 'https://placehold.co/400x400?text=Photo' },
-  //   { id: 'c5', name: 'Dr. Kumar Gourav', role: 'Organizing Secretary', imageUrl: 'https://placehold.co/400x400?text=Photo' },
-  //   { id: 'c6', name: 'Dr. Vijay Kumar', role: 'Organizing Treasurer', imageUrl: '/assets/vijay.png' }
+  { id: 'c4', name: 'Dr. Rajiv Kr. Pandey', role: 'Gen. & Lap. Surgeon (Deoghar)', imageUrl: getAssetPath('/assets/Dr_Rajiv_Kumar_PandeyCircle.png') },
+  { id: 'c5', name: 'Dr. B. N. Prasad', role: 'Treasurer', imageUrl: getAssetPath('/assets/Dr B N prasad  Treasurer.png') },
+  { id: 'c6', name: 'Dr. Ajay Kumar', role: 'Joint Secretary', imageUrl: getAssetPath('/assets/Dr ajay  kumar  joint secretary.png') },
+  { id: 'c7', name: 'Dr. Abhinav Prakash Arya', role: 'Assoc. Prof., AIIMS Deoghar', imageUrl: getAssetPath('/assets/Dr_Abhinav Prakash.png') },
+  { id: 'c8', name: 'Dr. R. P. Srivastava', role: 'Patron', imageUrl: getAssetPath('/assets/Dr r p srivastava  patron.png') },
+  { id: 'c9', name: 'Dr. Chitranjan Kumar Pankaj', role: 'Sudha Hospital, B. Deoghar', imageUrl: getAssetPath('/assets/Dr_CHITRANJAN_KUMAR.png') },
+  { id: 'c10', name: 'Dr. Sanjay Kumar', role: 'Chairman, ASI Jharkhand State Chapter', imageUrl: getAssetPath('/assets/Dr sanjay kumar Chairman  ASI Jharkhand State Chapter-modified.png') },
+  { id: 'c11', name: 'Dr. Anil Kumar', role: 'Asst. Prof., Dept. of Neurosurgery, AIIMS Deoghar', imageUrl: getAssetPath('/assets/Dr_Anil_kumar.png') },
+  { id: 'c12', name: 'Dr. Amardeep Kumar', role: 'Assoc. Prof., Dept. of Gen. Surgery, AIIMS Deoghar', imageUrl: getAssetPath('/assets/Dr_Amardeep_Kumar.png') },
+  { id: 'c13', name: 'Dr. Jagjivan Murmu', role: 'Jivan Chhaya Clinic, Deoghar', imageUrl: getAssetPath('/assets/DR_JAGJIVAN_MURMU_JIVAN_CHHAYA CLINIC_DEOGHAR.png') },
+  { id: 'c14', name: 'Dr. Rajesh Singh', role: 'Secretary, ASI (Jharkhand)', imageUrl: getAssetPath('/assets/Dr_Rajesh_Kumar_Singh.png') },
+  { id: 'c15', name: 'Dr. Ravi Kumar', role: 'Media and IT', imageUrl: getAssetPath('/assets/Dr_Ravi_Kumar.png') },
 ]
 
 
 export const EXTENDED_COMMITTEE: ExtendedCommitteeSection[] = [
   {
     title: 'E.C. Member, ASI (Jharkhand)',
-    members: ['Dr. Vijay Kumar', 'Dr. Md. Azad']
-  },
-  {
-    title: 'Chief Patron',
-    members: ['Dr. R. P. Shrivastava']
+    members: ['Dr. Md. Azad']
   },
   {
     title: 'Patron',
@@ -57,11 +67,7 @@ export const EXTENDED_COMMITTEE: ExtendedCommitteeSection[] = [
   },
   {
     title: 'Reception Committee',
-    members: ['Dr. Rajiv Pandey', 'Dr. Rajesh Kumar', 'Dr. Devanand Prakash']
-  },
-  {
-    title: 'Fund Raising Committee',
-    members: ['Dr. Chittranjan Pankaj']
+    members: ['Dr. Rajesh Kumar', 'Dr. Devanand Prakash']
   },
   {
     title: 'Scientific Committee',
@@ -73,12 +79,8 @@ export const EXTENDED_COMMITTEE: ExtendedCommitteeSection[] = [
   },
   {
     title: 'Catering & Entertainment',
-    members: ['Dr. Jagjivan Murmu', 'Dr. Vinod Kumar']
+    members: ['Dr. Vinod Kumar']
   },
-  {
-    title: 'Media & IT',
-    members: ['Dr. Ravi Kumar']
-  }
 ];
 
 // Added missing FACULTY constant to resolve import error in Faculty.tsx
@@ -109,24 +111,7 @@ export const FACULTY: FacultyMember[] = [
   }
 ];
 
-export const WORKSHOPS: Workshop[] = [
-  {
-    id: 'w1',
-    title: 'Advanced Laparoscopy Masterclass',
-    price: 15000,
-    description: 'Hands-on training on pelvic anatomy and suturing techniques.',
-    slots: 30,
-    imageUrl: 'https://picsum.photos/seed/ws1/600/400'
-  },
-  {
-    id: 'w2',
-    title: 'Infertility & IVF Management',
-    price: 12000,
-    description: 'Comprehensive guide to ovarian stimulation and lab protocols.',
-    slots: 50,
-    imageUrl: 'https://picsum.photos/seed/ws2/600/400'
-  }
-];
+export const WORKSHOPS: Workshop[] = [];
 
 export const PROGRAM: ProgramSession[] = [
   { id: 's1', time: '09:00 AM', topic: 'Keynote: Future of Fetal Medicine', speaker: 'Dr. Elizabeth Thorne', hall: 'Main Hall A', day: 1 },

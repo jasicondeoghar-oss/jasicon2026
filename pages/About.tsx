@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { MapPin, Info, Globe, ShieldCheck, ExternalLink, Navigation, LocateFixed } from 'lucide-react';
+import { getAssetPath } from '../constants';
 
 const About: React.FC = () => {
   const mapLink = "https://www.google.com/maps/search/?api=1&query=Maihar+Garden+Resort,+Daburgram,+Jasidih+Road,+Deoghar,+Jharkhand+814142";
@@ -50,41 +51,6 @@ const About: React.FC = () => {
               <p className="font-bold text-[#C9A24D]">
                 Let’s learn, share, and grow together. Don’t miss it!
               </p>
-
-              <div className="pt-8">
-                <h2 className="text-3xl md:text-5xl font-bold serif text-[#C9A24D] mb-6">About ASI India</h2>
-                <div className="w-24 h-1 bg-[#C9A24D]/30 mb-8"></div>
-
-                <p>
-                  The Association of Surgeons of India (ASI) was established in 1938 with the vision of bringing surgeons together to share knowledge, exchange experiences, and enhance surgical skills. From a humble beginning with just 112 members, ASI has grown into the largest association of surgeons in India, with a membership exceeding 35,600+ and continuously expanding.
-                </p>
-                <p className="mt-4">
-                  ASI operates through 26 state chapters and multiple city branches across the country, covering most states and union territories. The association is devoted to the noble cause of relieving human suffering through dedicated surgical service. It works tirelessly to bring advanced surgical techniques and education even to the remotest parts of the country.
-                </p>
-
-                <div className="grid md:grid-cols-2 gap-8 mt-8">
-                  <div className="p-6 bg-[#121826] rounded-2xl border-l-4 border-[#C9A24D]">
-                    <p className="text-2xl md:text-3xl serif italic text-[#C9A24D] font-bold">"Vayam Sevaamahe"</p>
-                    <p className="text-[#9AA4B2] mt-2 uppercase tracking-widest text-xs font-bold">— We are for service</p>
-                  </div>
-
-                  <div className="p-6 bg-[#121826] rounded-2xl border border-[#1F2937]">
-                    <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                      <ShieldCheck className="text-[#C9A24D]" size={20} />
-                      Specialty Sections
-                    </h3>
-                    <ul className="text-sm text-[#9AA4B2] space-y-1">
-                      <li>Colo-rectal Surgery</li>
-                      <li>Endocrine Surgery</li>
-                      <li>Genito-urinary Surgery</li>
-                      <li>Minimal Access Surgery</li>
-                      <li>Trauma & Critical Care</li>
-                      <li>...and 7 more specialties</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
             </div>
           </div>
         </div>
@@ -136,7 +102,7 @@ const About: React.FC = () => {
       {/* Feature Icons Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 py-12 md:py-20 border-t border-[#1F2937] animate-fade-in-up delay-4">
         {[
-          { title: 'Vision', icon: <Globe />, text: 'Establishing global benchmarks in obstetric excellence.' },
+          { title: 'Vision', icon: <Globe />, text: 'Establishing global benchmarks in surgical excellence.' },
           { title: 'Knowledge', icon: <Info />, text: 'Curating evidence-based clinical insights.' },
           { title: 'Ethics', icon: <ShieldCheck />, text: 'Upholding patient-centric medical integrity.' },
           { title: 'Network', icon: <Navigation />, text: 'Connecting medical pioneers across borders.' }
@@ -152,6 +118,101 @@ const About: React.FC = () => {
           </div>
         ))}
       </div>
+
+      {/* Deoghar: Past and Present Section */}
+      <section className="mt-20 md:mt-32 animate-fade-in-up">
+        <div className="bg-[#121826] border border-[#1F2937] rounded-[40px] overflow-hidden shadow-2xl">
+          <div className="bg-[#0B0F14]/30 border-b border-[#1F2937] py-16 md:py-24 px-6 text-center">
+            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white mb-4">
+              Deoghar <span className="text-[#C9A24D]">Past & Present</span>
+            </h2>
+            <p className="text-[#C9A24D] font-bold serif italic text-lg md:text-2xl">"A thing of beauty is joy forever" — Keats</p>
+          </div>
+
+          <div className="p-8 md:p-16 space-y-8 md:space-y-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 text-[#E6EAF0] text-sm md:text-lg leading-relaxed">
+              <div className="space-y-6">
+                <p>
+                  This sublime beauty is fully manifested in the mythological shrines, rivulets and hills and sanctity of this holy city. The great saints and hermits made this holy city a seat of prolonged meditation and also the poets and novelists of Bengali and Hindi lite settled here and drew inspiration from its colourful landscape. The great Bengali novelist Sharat Chandra stayed here for many years.
+                </p>
+                <p>
+                  Ishwar Chandra Vidyasagar was from this District, a place Karmatand now named 'Vidyasagar'. As we trace the history of Deoghar we find that Deoghar has magnetic effect since, time immemorial. Religious and intellectual leaders of their time like Ram Krishna Paramhans, Swami Vivekanand, Rabindranath Tagore, Maharshi Arvindo, Mahatma Gandhi, Subash Chandra Bose visited this place.
+                </p>
+                <p>
+                  This city presents festive look during the month of Shrawani when Lakhs of 'Kanwaria' of all age groups after traversing a distance of 100 km from Sultangaj reach here to pour water of Ganges on Lord Shiva. The Dwadas Shivling lying in Baidyanath Temple known as 'Kamna Ling' fulfills the hopes and desires to those who brings 'kanwar from Sultanganj to Deoghar' particularly in 'Shrawan'.
+                </p>
+              </div>
+              <div className="space-y-6">
+                <div className="p-6 md:p-8 bg-[#0B0F14]/50 border border-[#C9A24D]/20 rounded-3xl">
+                  <p className="italic text-[#9AA4B2] mb-4">
+                    The climate is dry and congenial and Deoghar is still considered a health resort in spite of great congestion particularly due to the temple of Baidyanath.
+                  </p>
+                  <p className="text-sm">
+                    The nearest railway station is Baidyanath. Jasidih junction is about 7 km from Baidyanathdham railway station, which is on the main line of Howrah-Delhi route of Indian railway. It is about 224 km from Patna and 322 km from Ranchi.
+                  </p>
+                </div>
+                <p>
+                  Round the years tourists come here from different states particularly Bengal, U.P. and M.P. There are so many religious and natural tourists spots in and around Deoghar.
+                </p>
+                <div className="pt-4 flex flex-col gap-6">
+                  <div className="flex items-center gap-4 text-[#C9A24D]">
+                    <MapPin size={24} />
+                    <span className="font-bold uppercase tracking-widest text-xs md:text-sm">Explore Religious & Natural Tourist Spots</span>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-3 md:gap-4 animate-fade-in-up delay-2">
+                    {[
+                      { url: getAssetPath("/assets/a.png"), title: "Gateway" },
+                      { url: getAssetPath("/assets/b.png"), title: "Mandir" },
+                      { url: getAssetPath("/assets/c.jpg"), title: "Nature" }
+                    ].map((img, i) => (
+                      <div key={i} className="group relative aspect-square rounded-2xl overflow-hidden border border-[#C9A24D]/30 hover:border-[#C9A24D] transition-all duration-500 shadow-lg">
+                        <img
+                          src={img.url}
+                          alt={img.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter brightness-[0.8] group-hover:brightness-100"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F14]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-[#1F2937] pt-12">
+              <h3 className="text-2xl md:text-3xl font-bold serif text-[#C9A24D] mb-8">Temples & Tourist Spots</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-6">
+                {[
+                  "Baidyanath Mandir (and 22 other mandirs in the campus)",
+                  "Naulakha - Temple of Radha Krishna",
+                  "Dev Sangh - Nav Durga Mandir",
+                  "Kundeshwari - Kali Mandir",
+                  "Balanand Brahmchari & Pagla Baba Ashram",
+                  "Satsang Ashram - A holy place for devotees of Shri Shri Thakur Anukul Chandra",
+                  "Nandan Pahar - Nandi Temple & Scenic Views",
+                  "Tapovan - Famous for beautiful caves",
+                  "Trikut Pahar - Sages Reputed Salvation & Ropeway",
+                  "Basukinath - Attractive Shiva Temple",
+                  "Rohini - Martyr's Memorial of freedom movement",
+                  "Rikhia - Shivanand Math established by Swami Satyanand"
+                ].map((spot, index) => (
+                  <div key={index} className="flex items-start gap-3 group">
+                    <span className="text-[#C9A24D] font-bold opacity-50 transition-opacity group-hover:opacity-100">{index + 1}.</span>
+                    <span className="text-[#9AA4B2] group-hover:text-white transition-colors">{spot}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-[#C9A24D]/5 p-8 rounded-3xl border border-[#C9A24D]/10">
+              <p className="text-sm md:text-base text-[#E6EAF0] leading-relaxed">
+                World famous Yogi Swami Satyanand Saraswati, founder of Bihar School of Yoga at Munger, has established Shivanand Math at Rikhia 9 km from Deoghar. His disciples from all over the world visit the place regularly and due to swami, Deoghar has come up on the international map.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

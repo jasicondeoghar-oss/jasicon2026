@@ -8,7 +8,7 @@ const Travel: React.FC = () => {
       <div className="text-center mb-20 animate-fade-in-up">
         <h1 className="text-5xl font-bold serif text-[#C9A24D] mb-4">Travel Guide</h1>
         <p className="text-[#9AA4B2] italic max-w-2xl mx-auto">
-          Essential information for international and national delegates visiting New Delhi for DOCON 2026.
+          Essential information for international and national delegates visiting New Delhi for JASICON 2026.
         </p>
       </div>
 
@@ -77,33 +77,33 @@ const Travel: React.FC = () => {
 
       {/* Hero Section - Fixed Image */}
       <div className="relative h-[650px] rounded-[40px] overflow-hidden border border-[#1F2937] group animate-fade-in-up delay-3 shadow-2xl">
-        <img 
-          src="https://images.unsplash.com/photo-1548013146-72479768b921?q=80&w=2070&auto=format&fit=crop" 
-          className="w-full h-full object-cover filter brightness-[0.5] grayscale-[20%] group-hover:grayscale-0 transition-all duration-1000 ease-out animate-ken-burns" 
-          alt="New Delhi Cinematic Heritage" 
+        <img
+          src="https://images.unsplash.com/photo-1548013146-72479768b921?q=80&w=2070&auto=format&fit=crop"
+          className="w-full h-full object-cover filter brightness-[0.5] grayscale-[20%] group-hover:grayscale-0 transition-all duration-1000 ease-out animate-ken-burns"
+          alt="New Delhi Cinematic Heritage"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F14] via-[#0B0F14]/20 to-transparent"></div>
-        
+
         <div className="absolute top-12 right-12 bg-[#C9A24D]/10 backdrop-blur-md border border-[#C9A24D]/30 px-8 py-3 rounded-full hidden md:block">
-           <span className="text-[#C9A24D] text-xs font-bold uppercase tracking-widest">Host City: New Delhi</span>
+          <span className="text-[#C9A24D] text-xs font-bold uppercase tracking-widest">Host City: New Delhi</span>
         </div>
 
         <div className="absolute bottom-16 left-16 right-16 flex flex-col md:flex-row justify-between items-end gap-12">
-           <div className="max-w-2xl">
-              <h4 className="text-5xl font-bold serif mb-6 text-[#E6EAF0]">Discover the Capital</h4>
-              <p className="text-[#9AA4B2] italic leading-relaxed text-xl">
-                Immerse yourself in the rich tapestry of India's capital city. Experience the majestic architecture and vibrant spirit of Delhi during DOCON 2026.
-              </p>
-           </div>
-           <div className="flex flex-col sm:flex-row gap-6 w-full md:w-auto">
-             <button className="shrink-0 bg-[#C9A24D] text-[#0B0F14] px-12 py-5 rounded-full font-bold text-lg hover:bg-white transition-all transform hover:scale-105 shadow-2xl flex items-center justify-center gap-3">
-                <MapPin size={22} />
-                <span>Venue Map</span>
-             </button>
-             <button className="shrink-0 bg-white/5 border border-white/20 text-white px-12 py-5 rounded-full font-bold text-lg hover:bg-white/10 transition-all transform hover:scale-105 backdrop-blur-md">
-                Download City Guide
-             </button>
-           </div>
+          <div className="max-w-2xl">
+            <h4 className="text-5xl font-bold serif mb-6 text-[#E6EAF0]">Discover the Capital</h4>
+            <p className="text-[#9AA4B2] italic leading-relaxed text-xl">
+              Immerse yourself in the rich tapestry of India's capital city. Experience the majestic architecture and vibrant spirit of Delhi during JASICON 2026.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-6 w-full md:w-auto">
+            <button className="shrink-0 bg-[#C9A24D] text-[#0B0F14] px-12 py-5 rounded-full font-bold text-lg hover:bg-white transition-all transform hover:scale-105 shadow-2xl flex items-center justify-center gap-3">
+              <MapPin size={22} />
+              <span>Venue Map</span>
+            </button>
+            <button className="shrink-0 bg-white/5 border border-white/20 text-white px-12 py-5 rounded-full font-bold text-lg hover:bg-white/10 transition-all transform hover:scale-105 backdrop-blur-md">
+              Download City Guide
+            </button>
+          </div>
         </div>
       </div>
     </div>

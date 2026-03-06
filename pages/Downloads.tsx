@@ -15,20 +15,20 @@ const Downloads: React.FC = () => {
    * Generates a unique dummy PDF (text-based blob) for each file title.
    */
   const handleDownload = (title: string) => {
-    const filename = `${title.replace(/\s+/g, '_')}_DOCON2026.pdf`;
+    const filename = `${title.replace(/\s+/g, '_')}_JASICON2026.pdf`;
     const content = `
-      DOCON 2026 - NATIONAL CONFERENCE OF OBSTETRICS & GYNECOLOGY
+      JASICON 2026 - NATIONAL CONFERENCE OF OBSTETRICS & GYNECOLOGY
       ---------------------------------------------------------
       DOCUMENT: ${title}
       DATE: ${new Date().toLocaleDateString()}
-      AUTHORITY: DOCON 2026 Organizing Committee
+      AUTHORITY: JASICON 2026 Organizing Committee
       
       This is a secure academic document intended for registered delegates.
       Content: Guidelines, schedules, and clinical resources for the conference.
       
       Verify this document at the conference secretariat if needed.
     `.trim();
-    
+
     const blob = new Blob([content], { type: 'application/pdf' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -44,14 +44,14 @@ const Downloads: React.FC = () => {
     <div className="max-w-5xl mx-auto px-4 py-20">
       <div className="text-center mb-16 animate-fade-in-up">
         <h1 className="text-5xl font-bold serif text-[#C9A24D] mb-4">Downloads</h1>
-        <p className="text-[#9AA4B2] italic">Access essential documents and clinical resources for DOCON 2026.</p>
+        <p className="text-[#9AA4B2] italic">Access essential documents and clinical resources for JASICON 2026.</p>
       </div>
 
       <div className="glass-card rounded-3xl overflow-hidden border border-[#1F2937] animate-fade-in-up delay-1 shadow-2xl">
         <div className="divide-y divide-[#1F2937]">
           {FILES.map((file, index) => (
-            <div 
-              key={file.id} 
+            <div
+              key={file.id}
               className="p-8 flex flex-col md:flex-row items-center justify-between hover:bg-white/5 transition-all duration-300 group animate-fade-in-up"
               style={{ animationDelay: `${(index + 1) * 0.1}s` }}
             >
@@ -68,8 +68,8 @@ const Downloads: React.FC = () => {
                   </div>
                 </div>
               </div>
-              
-              <button 
+
+              <button
                 onClick={() => handleDownload(file.title)}
                 className="mt-6 md:mt-0 bg-[#1F2937] hover:bg-[#C9A24D] hover:text-[#0B0F14] text-[#C9A24D] px-8 py-3 rounded-full font-bold flex items-center space-x-2 transition-all transform hover:scale-105 active:scale-95 border border-[#C9A24D]/20"
               >

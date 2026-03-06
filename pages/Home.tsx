@@ -67,7 +67,7 @@ const Home: React.FC = () => {
   return (
     <div className="relative w-full overflow-x-hidden">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] md:h-[90vh] w-full overflow-hidden bg-[#0B0F14] flex flex-col justify-center">
+      <section className="relative min-h-[90vh] w-full overflow-hidden bg-[#0B0F14] flex flex-col items-center justify-center md:justify-center">
 
         {/* Sliding Background */}
         <div className="absolute inset-0 flex transition-transform duration-1000 cubic-bezier(0.4, 0, 0.2, 1)"
@@ -87,7 +87,7 @@ const Home: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F14] via-transparent to-[#0B0F14]/40 pointer-events-none"></div>
 
         {/* Content Layer */}
-        <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-8 pt-16 pb-24 md:py-20 text-center lg:text-left">
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-8 pt-16 pb-32 sm:pb-40 md:pb-56 lg:pb-72 text-center lg:text-left">
           <div className="animate-blur-fade">
             <div className="inline-flex items-center space-x-2 bg-[#C9A24D]/30 border border-[#C9A24D]/50 px-4 py-1.5 rounded-full mb-6 backdrop-blur-xl">
               <span className="w-1.5 h-1.5 rounded-full bg-[#C9A24D] animate-pulse"></span>
@@ -101,8 +101,8 @@ const Home: React.FC = () => {
                 Welcome to Deoghar
               </h2>
             </div>
-            <h1 className="text-4xl sm:text-7xl md:text-[10rem] font-bold serif leading-none text-white animate-blur-fade drop-shadow-2xl">
-              JASICON <span className="text-[#C9A24D]">2026</span>
+            <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-[8.5rem] font-bold serif leading-none text-white animate-blur-fade drop-shadow-2xl whitespace-nowrap">
+              25th JASICON <span className="text-[#C9A24D]">2026</span>
             </h1>
             <p className="text-base sm:text-2xl md:text-5xl text-[#E6EAF0] font-light italic serif tracking-tight opacity-90 animate-blur-fade">
               Advancing Clinical Excellence Together
@@ -143,7 +143,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Countdown Section */}
-      <section className="relative px-4 -mt-10 sm:-mt-16 z-30 max-w-5xl mx-auto mb-16 md:mb-20">
+      <section className="relative px-4 -mt-12 sm:-mt-16 md:-mt-20 lg:-mt-24 z-30 max-w-5xl mx-auto mb-16 md:mb-20">
         <div className="bg-[#121826]/95 backdrop-blur-3xl border border-[#1F2937] rounded-2xl sm:rounded-[40px] p-6 sm:p-10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-12">
           <div className="text-center md:text-left">
             <h3 className="text-lg sm:text-2xl font-bold serif text-[#C9A24D]">Registration Deadline</h3>
