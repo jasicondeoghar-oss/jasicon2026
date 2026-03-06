@@ -44,8 +44,7 @@ const Legal: React.FC<LegalProps> = ({ type }) => {
           title: 'Refund Policy',
           content: (
             <div className="space-y-6 text-[#9AA4B2]">
-              <p>If the Customer leaves the THE ASSOCIATION OF SURGEONS OF INDIA before they complete their service period, there shall be no entitlement to a refund of paid service fees.</p>
-              <p>Refunds, if applicable, at the discretion of the Management, will only be made to the debit/credit card used for the original transaction. For the avoidance of doubt nothing in this Policy shall require the THE ASSOCIATION OF SURGEONS OF INDIA to refund the Fees (or part thereof) unless such Fees (or part thereof) have previously been paid.</p>
+              <p>No refund.</p>
             </div>
           )
         };
