@@ -69,11 +69,13 @@ const Home: React.FC = () => {
       {/* Hero Section */}
       <section className="relative min-h-[90vh] w-full overflow-hidden bg-[#0B0F14] flex flex-col items-center justify-center md:justify-center">
 
-        {/* Sliding Background */}
-        <div className="absolute inset-0 flex transition-transform duration-1000 cubic-bezier(0.4, 0, 0.2, 1)"
-          style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
+        {/* Fade Background */}
+        <div className="absolute inset-0">
           {HERO_IMAGES.map((item, idx) => (
-            <div key={idx} className="relative w-full h-full flex-shrink-0">
+            <div
+              key={idx}
+              className={`absolute inset-0 transition-opacity duration-1000 cubic-bezier(0.4, 0, 0.2, 1) ${currentSlide === idx ? 'opacity-100' : 'opacity-0'}`}
+            >
               <img
                 src={item.url}
                 alt={item.title}
@@ -186,3 +188,6 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+
+
+
