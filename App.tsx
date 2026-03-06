@@ -78,6 +78,7 @@ const App: React.FC = () => {
               <Route path="/privacy" element={<Legal type="privacy" />} />
               <Route path="/terms" element={<Legal type="terms" />} />
               <Route path="/refund" element={<Legal type="refund" />} />
+              <Route path="/shipping" element={<Legal type="shipping" />} />
             </Routes>
           </main>
           <Footer />

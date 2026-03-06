@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 
 type LegalProps = {
-  type: 'privacy' | 'terms' | 'refund';
+  type: 'privacy' | 'terms' | 'refund' | 'shipping';
 };
 
 const Legal: React.FC<LegalProps> = ({ type }) => {
@@ -41,10 +41,19 @@ const Legal: React.FC<LegalProps> = ({ type }) => {
         };
       case 'refund':
         return {
-          title: 'Refund Policy',
+          title: 'Cancellation and Refund',
           content: (
             <div className="space-y-6 text-[#9AA4B2]">
               <p>No refund.</p>
+            </div>
+          )
+        };
+      case 'shipping':
+        return {
+          title: 'Shipping and Delivery',
+          content: (
+            <div className="space-y-6 text-[#9AA4B2]">
+              <p>we provide services</p>
             </div>
           )
         };
