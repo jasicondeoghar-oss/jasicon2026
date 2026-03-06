@@ -12,7 +12,7 @@ if (!token) {
 }
 
 publish('dist', {
-    repo: `https://${token}@github.com/testdigixea/jasicon.git`,
+    repo: `https://${token}@github.com/jasicondeoghar-oss/jasicon2026.git`,
     user: {
         name: 'testdigixea',
         email: 'testdigixea@users.noreply.github.com'
