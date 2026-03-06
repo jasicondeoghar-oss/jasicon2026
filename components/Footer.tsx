@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
           <p>© 2026 JASICON. All Rights Reserved. Managed by <a href="https://digixea.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Digixea</a>.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link to="/privacy" className="hover:text-white">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-white">Terms of Service</Link>
+            <Link to="/terms" className="hover:text-white">Terms & Conditions</Link>
             <Link to="/refund" className="hover:text-white">Cancellation and Refund</Link>
             <Link to="/shipping" className="hover:text-white">Shipping and Delivery</Link>
           </div>
