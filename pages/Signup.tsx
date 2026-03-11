@@ -106,7 +106,7 @@ const Signup: React.FC = () => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 className="w-full bg-[#0B0F14] border border-[#1F2937] rounded-xl py-2.5 pl-10 pr-4 text-white focus:outline-none focus:border-[#C9A24D] transition-colors"
-                                placeholder="doctor@example.com"
+                                placeholder="faculty@example.com"
                             />
                         </div>
                     </div>

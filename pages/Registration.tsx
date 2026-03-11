@@ -26,7 +26,7 @@ const Registration: React.FC = () => {
     institution: '',
     designation: '',
     medicalRegNo: '',
-    category: 'Doctor',
+    category: 'Faculty',
     selectedWorkshops: [] as string[]
   });
 
@@ -37,7 +37,7 @@ const Registration: React.FC = () => {
   const delegateId = `JAS26-10${user?.uid.slice(-3) || '000'}`;
 
   const pricingData = [
-    { cat: 'Doctor', reg: '₹3000 + GST' },
+    { cat: 'Faculty', reg: '₹3000 + GST' },
     { cat: 'Delegate', reg: '₹3000 + GST' },
     { cat: 'PG Student', reg: '₹2000 + GST' },
   ];
@@ -135,7 +135,7 @@ const Registration: React.FC = () => {
 
   const calculateTotal = () => {
     const categoryPricing: Record<string, number> = {
-      'Doctor': 3000,
+      'Faculty': 3000,
       'PG Student': 2000,
       'Delegate': 3000
     };
@@ -300,6 +300,9 @@ const Registration: React.FC = () => {
                 <p className="text-sm sm:text-lg font-bold text-white serif leading-tight">
                   On-spot registration: No guarantee of kit bag.
                 </p>
+                <p className="text-sm sm:text-lg font-bold text-white serif leading-tight mt-2">
+                  Self Accommodation: Participants are requested to arrange their own accommodation.
+                </p>
               </div>
             </div>
           </div>
@@ -463,7 +466,7 @@ const Registration: React.FC = () => {
                             onChange={handleInputChange}
                             className={`w-full bg-[#0B0F14]/50 border ${errors.category ? 'border-red-500' : 'border-[#1F2937]'} rounded-xl px-5 py-4 focus:border-[#C9A24D] outline-none text-sm appearance-none cursor-pointer pr-12`}
                           >
-                            <option value="Doctor">Doctor</option>
+                            <option value="Faculty">Faculty</option>
                             <option value="Delegate">Delegate</option>
                             <option value="PG Student">PG Student</option>
                           </select>
@@ -481,7 +484,7 @@ const Registration: React.FC = () => {
                           <p className="text-xl font-bold text-[#2EC4B6]">₹{calculateTotal().total.toLocaleString()}</p>
                         </div>
                       </div>
-                      {(formData.category === 'Doctor' || formData.category === 'Delegate') && (
+                      {(formData.category === 'Faculty' || formData.category === 'Delegate') && (
                         <div className="space-y-2">
                           <label className="text-[10px] font-bold uppercase text-[#9AA4B2]">Medical Reg No / License</label>
                           <input

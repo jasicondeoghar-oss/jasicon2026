@@ -19,6 +19,8 @@ import Contact from './pages/Contact';
 import Gallery from './pages/Gallery';
 import Downloads from './pages/Downloads';
 import Legal from './pages/Legal';
+import ASIJharkhand from './pages/ASIJharkhand';
+import ASICentral from './pages/ASICentral';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
 const ScrollToTop = () => {
@@ -55,7 +57,9 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/committee" element={<Committee />} />
+              <Route path="/committee/organizing" element={<Committee />} />
+              <Route path="/committee/asi-jharkhand" element={<ASIJharkhand />} />
+              <Route path="/committee/asi-central" element={<ASICentral />} />
               <Route path="/program" element={<Program />} />
               <Route path="/faculty" element={<Faculty />} />
               <Route path="/accommodation" element={<Accommodation />} />

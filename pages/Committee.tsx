@@ -11,7 +11,7 @@ const Committee: React.FC = () => {
       </div>
 
       <div className="space-y-24 md:space-y-32">
-        {/* Core Leadership */}
+        {/* Leadership Board */}
         <section>
           <div className="flex items-center space-x-6 mb-12 animate-fade-in-up">
             <div className="h-px bg-[#1F2937] flex-grow"></div>
@@ -32,9 +32,7 @@ const Committee: React.FC = () => {
           </div>
         </section>
 
-        {/* Advisory Section */}
         {/* Extended Committee Sections */}
-        {/* Extended Committee Sections - Consolidated */}
         <section className="bg-[#121826] p-8 md:p-16 rounded-[40px] border border-[#1F2937] relative overflow-hidden animate-fade-in-up">
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#C9A24D]/5 blur-[100px] rounded-full"></div>
 
@@ -61,7 +59,7 @@ const Committee: React.FC = () => {
                 <div className="relative w-48 h-48 mb-6">
                   <div className="absolute inset-0 bg-[#C9A24D] rounded-full opacity-10 blur-xl"></div>
                   <img
-                    src={COMMITTEE.find(m => m.role === 'Chairman')?.imageUrl}
+                    src={COMMITTEE.find(m => m.role.includes('Chairman'))?.imageUrl}
                     className="relative w-full h-full object-cover rounded-full border-2 border-[#C9A24D]/30 p-1"
                     alt="Dr. Jugal Kishore Choudhary"
                   />
@@ -95,7 +93,7 @@ const Committee: React.FC = () => {
                 <div className="relative w-48 h-48 mb-6">
                   <div className="absolute inset-0 bg-[#C9A24D] rounded-full opacity-10 blur-xl"></div>
                   <img
-                    src={COMMITTEE.find(m => m.role === 'Secretary')?.imageUrl}
+                    src={COMMITTEE.find(m => m.role.includes('Secretary'))?.imageUrl}
                     className="relative w-full h-full object-cover rounded-full border-2 border-[#C9A24D]/30 p-1"
                     alt="Dr. Kumar Gourav"
                   />

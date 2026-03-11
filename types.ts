@@ -73,4 +73,5 @@ export interface RegistrationData {
 export interface ExtendedCommitteeSection {
   title: string;
   members: string[];
+  membersWithPhotos?: { name: string; imageUrl: string; role?: string }[];
 }

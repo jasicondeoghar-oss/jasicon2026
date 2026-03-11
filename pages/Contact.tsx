@@ -47,7 +47,7 @@ const Contact: React.FC = () => {
               <MapPin size={24} />
             </div>
             <h4 className="text-lg font-bold serif mb-2">Office</h4>
-            <p className="text-sm text-[#9AA4B2] leading-relaxed">SHIVOLIK SURGICAL HOSPITAL, Netaji Subhash Road, Caster Town, Deoghar - 814112</p>
+            <p className="text-sm text-[#9AA4B2] leading-relaxed">SHIVOLIK SURGICAL HOSPITAL, Netaji Subhash Road, Castairs Town, Deoghar - 814112</p>
           </div>
 
           <div className="glass-card p-8 rounded-3xl border border-[#1F2937] hover:border-[#C9A24D]/30 transition-all group animate-slide-left delay-1">

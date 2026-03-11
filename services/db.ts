@@ -64,7 +64,7 @@ export const saveContactMessage = async (data: ContactMessage) => {
 
         // Save to mail collection to trigger email extension
         await addDoc(collection(db, 'mail'), {
-            to: 'jasicondeoghar@gmail.com',
+            to: 'jasicon2026@gmail.com',
             message: {
                 subject: `New Direct Inquiry: ${data.fullName}`,
                 html: `

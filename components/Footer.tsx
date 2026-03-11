@@ -17,11 +17,11 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className="text-[#E6EAF0] font-semibold mb-6 uppercase tracking-wider text-sm">Contact Secretariate</h4>
+            <h4 className="text-[#E6EAF0] font-semibold mb-6 uppercase tracking-wider text-sm">Contact Secretariat</h4>
             <ul className="space-y-4 text-[#9AA4B2] text-sm">
               <li className="flex items-start space-x-3">
                 <MapPin size={18} className="text-[#C9A24D] shrink-0" />
-                <span>SHIVOLIK SURGICAL HOSPITAL, Netaji Subhash Road, Caster Town, Deoghar - 814112</span>
+                <span>SHIVOLIK SURGICAL HOSPITAL, Netaji Subhash Road, Castairs Town, Deoghar - 814112</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Phone size={18} className="text-[#C9A24D] shrink-0" />
@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center space-x-3">
                 <Mail size={18} className="text-[#C9A24D] shrink-0" />
-                <span>jasicondeoghar@gmail.com</span>
+                <span>jasicon2026@gmail.com</span>
               </li>
             </ul>
           </div>

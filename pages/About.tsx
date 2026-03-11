@@ -37,7 +37,7 @@ const About: React.FC = () => {
                 "Pioneering the Future of Surgical Excellence Through Innovation."
               </p>
               <p>
-                It gives us immense pleasure to welcome you to JASICON 2026, to be held at Maiha Garden, Deoghar, from 20th to 22nd November 2026. This prestigious conference will bring together surgeons from across Jharkhand and the country, reflecting our shared commitment to excellence, innovation, and advancement in the field of surgery.
+                It gives us immense pleasure to welcome you to JASICON 2026, to be held at Maihar Garden, Deoghar, from 20th to 22nd November 2026. This prestigious conference will bring together surgeons from across Jharkhand and the country, reflecting our shared commitment to excellence, innovation, and advancement in the field of surgery.
               </p>
               <p>
                 More than an academic gathering, JASICON 2026 is envisioned as a dynamic platform to reflect on the evolving landscape of surgical care, explore cutting-edge techniques, and deliberate on challenges that impact daily clinical practice. The conference aims to foster collaboration among surgeons from diverse backgrounds and encourage meaningful discussions that contribute to improved patient outcomes across the state.

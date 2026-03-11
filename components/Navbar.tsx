@@ -15,19 +15,25 @@ const Navbar: React.FC = () => {
   </Link>
   const [isOpen, setIsOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isCommitteeOpen, setIsCommitteeOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
+  const committeeMenuRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
     setIsOpen(false);
     setIsUserMenuOpen(false);
+    setIsCommitteeOpen(false);
   }, [location]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
         setIsUserMenuOpen(false);
+      }
+      if (committeeMenuRef.current && !committeeMenuRef.current.contains(event.target as Node)) {
+        setIsCommitteeOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -51,7 +57,15 @@ const Navbar: React.FC = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
-    { name: 'Committee', path: '/committee' },
+    {
+      name: 'Committee',
+      path: '/committee',
+      dropdown: [
+        { name: 'Organizing Committee', path: '/committee/organizing' },
+        { name: 'ASI Jharkhand', path: '/committee/asi-jharkhand' },
+        { name: 'ASI Central', path: '/committee/asi-central' },
+      ]
+    },
     { name: 'Program', path: '/program' },
     { name: 'Gallery', path: '/gallery' },
     { name: 'Registration', path: '/registration' },
@@ -70,15 +84,41 @@ const Navbar: React.FC = () => {
           <div className="hidden xl:flex items-center flex-1 justify-end space-x-4">
             <div className="flex items-center space-x-4">
               {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  className={`text-[10px] uppercase tracking-[0.1em] font-bold py-2 transition-all hover:text-[#C9A24D] relative group whitespace-nowrap ${location.pathname === link.path ? 'text-[#C9A24D]' : 'text-[#9AA4B2]'
-                    }`}
-                >
-                  {link.name}
-                  <span className={`absolute bottom-0 left-0 w-full h-[1px] bg-[#C9A24D] transition-transform ${location.pathname === link.path ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
-                </Link>
+                <div key={link.name} className="relative group" ref={link.dropdown ? committeeMenuRef : null}>
+                  {link.dropdown ? (
+                    <button
+                      onClick={() => setIsCommitteeOpen(!isCommitteeOpen)}
+                      className={`flex items-center space-x-1 text-[10px] uppercase tracking-[0.1em] font-bold py-2 transition-all hover:text-[#C9A24D] ${location.pathname.startsWith('/committee') ? 'text-[#C9A24D]' : 'text-[#9AA4B2]'
+                        }`}
+                    >
+                      <span>{link.name}</span>
+                      <ChevronDown size={10} className={`transition-transform duration-300 ${isCommitteeOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                  ) : (
+                    <Link
+                      to={link.path}
+                      className={`text-[10px] uppercase tracking-[0.1em] font-bold py-2 transition-all hover:text-[#C9A24D] relative group whitespace-nowrap ${location.pathname === link.path ? 'text-[#C9A24D]' : 'text-[#9AA4B2]'
+                        }`}
+                    >
+                      {link.name}
+                      <span className={`absolute bottom-0 left-0 w-full h-[1px] bg-[#C9A24D] transition-transform ${location.pathname === link.path ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
+                    </Link>
+                  )}
+
+                  {link.dropdown && isCommitteeOpen && (
+                    <div className="absolute left-0 mt-2 w-56 py-3 bg-[#121826] border border-[#1F2937] rounded-2xl shadow-2xl animate-fade-in-up z-[110]">
+                      {link.dropdown.map((subItem) => (
+                        <Link
+                          key={subItem.path}
+                          to={subItem.path}
+                          className={`block px-5 py-3 text-[10px] items-center space-x-3 uppercase tracking-widest font-bold transition-colors ${location.pathname === subItem.path ? 'text-[#C9A24D] bg-white/5' : 'text-[#9AA4B2] hover:text-[#C9A24D] hover:bg-white/5'}`}
+                        >
+                          {subItem.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
 
@@ -119,13 +159,39 @@ const Navbar: React.FC = () => {
       {isOpen && (
         <div className="xl:hidden bg-[#0B0F14] border-b border-[#1F2937] px-4 py-8 space-y-3 animate-fade-in-up fixed top-16 left-0 right-0 h-[calc(100vh-4rem)] overflow-y-auto">
           {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.path}
-              className={`block px-5 py-4 rounded-xl text-xs font-bold uppercase tracking-[0.15em] ${location.pathname === link.path ? 'bg-[#C9A24D] text-[#0B0F14]' : 'text-[#9AA4B2] bg-white/5'}`}
-            >
-              {link.name}
-            </Link>
+            <div key={link.name} className="space-y-2">
+              {link.dropdown ? (
+                <>
+                  <button
+                    onClick={() => setIsCommitteeOpen(!isCommitteeOpen)}
+                    className={`w-full flex items-center justify-between px-5 py-4 rounded-xl text-xs font-bold uppercase tracking-[0.15em] ${location.pathname.startsWith('/committee') ? 'bg-[#C9A24D]/10 text-[#C9A24D]' : 'text-[#9AA4B2] bg-white/5'}`}
+                  >
+                    <span>{link.name}</span>
+                    <ChevronDown size={16} className={`transition-transform duration-300 ${isCommitteeOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {isCommitteeOpen && (
+                    <div className="pl-4 space-y-2 animate-fade-in-up">
+                      {link.dropdown.map((subItem) => (
+                        <Link
+                          key={subItem.path}
+                          to={subItem.path}
+                          className={`block px-5 py-4 rounded-xl text-[10px] font-bold uppercase tracking-[0.15em] ${location.pathname === subItem.path ? 'bg-[#C9A24D] text-[#0B0F14]' : 'text-[#9AA4B2] bg-white/5'}`}
+                        >
+                          {subItem.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <Link
+                  to={link.path}
+                  className={`block px-5 py-4 rounded-xl text-xs font-bold uppercase tracking-[0.15em] ${location.pathname === link.path ? 'bg-[#C9A24D] text-[#0B0F14]' : 'text-[#9AA4B2] bg-white/5'}`}
+                >
+                  {link.name}
+                </Link>
+              )}
+            </div>
           ))}
           <div className="pt-4 border-t border-[#1F2937] flex flex-col gap-3">
             {user ? (
