@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-3 text-[#9AA4B2] text-sm">
               <li><Link to="/program" className="hover:text-[#C9A24D]">Scientific Program</Link></li>
               <li><Link to="/registration" className="hover:text-[#C9A24D]">Registration Guidelines</Link></li>
-              <li><Link to="/committee" className="hover:text-[#C9A24D]">Organizing Committee</Link></li>
+              <li><Link to="/committee/organizing" className="hover:text-[#C9A24D]">Organizing Committee</Link></li>
               <li><Link to="/contact" className="hover:text-[#C9A24D]">Exhibition & Sponsorship</Link></li>
             </ul>
           </div>

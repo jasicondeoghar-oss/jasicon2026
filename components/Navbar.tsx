@@ -9,13 +9,10 @@ import { Menu, X, User as UserIcon, LogOut, ChevronDown, LayoutDashboard, LogIn 
 
 const Navbar: React.FC = () => {
   const { user, logout } = useAuth();
-  // ... (lines 10-56)
-  <Link to="/" className="flex items-center group shrink-0">
-    <img src={getAssetPath("/assets/logo.png")} alt="Jasicon 2026" className="h-12 sm:h-16 w-auto object-contain transition-opacity hover:opacity-90" />
-  </Link>
   const [isOpen, setIsOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isCommitteeOpen, setIsCommitteeOpen] = useState(false);
+  const [isMobileCommitteeOpen, setIsMobileCommitteeOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
   const committeeMenuRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -25,6 +22,7 @@ const Navbar: React.FC = () => {
     setIsOpen(false);
     setIsUserMenuOpen(false);
     setIsCommitteeOpen(false);
+    setIsMobileCommitteeOpen(false);
   }, [location]);
 
   useEffect(() => {
@@ -32,7 +30,7 @@ const Navbar: React.FC = () => {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
         setIsUserMenuOpen(false);
       }
-      if (committeeMenuRef.current && !committeeMenuRef.current.contains(event.target as Node)) {
+      if (!isOpen && committeeMenuRef.current && !committeeMenuRef.current.contains(event.target as Node)) {
         setIsCommitteeOpen(false);
       }
     };
@@ -157,25 +155,25 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="xl:hidden bg-[#0B0F14] border-b border-[#1F2937] px-4 py-8 space-y-3 animate-fade-in-up fixed top-16 left-0 right-0 h-[calc(100vh-4rem)] overflow-y-auto">
+        <div className="xl:hidden bg-[#0B0F14] border-b border-[#1F2937] px-4 py-8 space-y-3 animate-fade-in-up fixed top-16 sm:top-20 left-0 right-0 h-[calc(100vh-4rem)] sm:h-[calc(100vh-5rem)] overflow-y-auto">
           {navLinks.map((link) => (
             <div key={link.name} className="space-y-2">
               {link.dropdown ? (
                 <>
                   <button
-                    onClick={() => setIsCommitteeOpen(!isCommitteeOpen)}
+                    onClick={() => setIsMobileCommitteeOpen(!isMobileCommitteeOpen)}
                     className={`w-full flex items-center justify-between px-5 py-4 rounded-xl text-xs font-bold uppercase tracking-[0.15em] ${location.pathname.startsWith('/committee') ? 'bg-[#C9A24D]/10 text-[#C9A24D]' : 'text-[#9AA4B2] bg-white/5'}`}
                   >
                     <span>{link.name}</span>
-                    <ChevronDown size={16} className={`transition-transform duration-300 ${isCommitteeOpen ? 'rotate-180' : ''}`} />
+                    <ChevronDown size={16} className={`transition-transform duration-300 ${isMobileCommitteeOpen ? 'rotate-180' : ''}`} />
                   </button>
-                  {isCommitteeOpen && (
+                  {isMobileCommitteeOpen && (
                     <div className="pl-4 space-y-2 animate-fade-in-up">
                       {link.dropdown.map((subItem) => (
                         <Link
                           key={subItem.path}
                           to={subItem.path}
-                          className={`block px-5 py-4 rounded-xl text-[10px] font-bold uppercase tracking-[0.15em] ${location.pathname === subItem.path ? 'bg-[#C9A24D] text-[#0B0F14]' : 'text-[#9AA4B2] bg-white/5'}`}
+                          className={`block px-5 py-4 rounded-xl text-xs font-bold uppercase tracking-[0.15em] ${location.pathname === subItem.path ? 'bg-[#C9A24D] text-[#0B0F14]' : 'text-[#9AA4B2] bg-white/5'}`}
                         >
                           {subItem.name}
                         </Link>

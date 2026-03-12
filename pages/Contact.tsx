@@ -95,17 +95,17 @@ const Contact: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-3">
                       <label className="text-[10px] uppercase tracking-widest text-[#9AA4B2] font-black">Full Name</label>
-                      <input type="text" name="fullName" required className="w-full bg-[#0B0F14] border border-[#1F2937] rounded-2xl px-8 py-5 focus:outline-none focus:border-[#C9A24D]" placeholder="Dr. Jane Smith" />
+                      <input type="text" name="fullName" required className="w-full bg-[#0B0F14] border border-[#1F2937] rounded-2xl px-8 py-5 focus:outline-none focus:border-[#C9A24D]" />
                     </div>
                     <div className="space-y-3">
                       <label className="text-[10px] uppercase tracking-widest text-[#9AA4B2] font-black">Email</label>
-                      <input type="email" name="email" required className="w-full bg-[#0B0F14] border border-[#1F2937] rounded-2xl px-8 py-5 focus:outline-none focus:border-[#C9A24D]" placeholder="jane@hospital.com" />
+                      <input type="email" name="email" required className="w-full bg-[#0B0F14] border border-[#1F2937] rounded-2xl px-8 py-5 focus:outline-none focus:border-[#C9A24D]" />
                     </div>
                   </div>
 
                   <div className="space-y-3">
                     <label className="text-[10px] uppercase tracking-widest text-[#9AA4B2] font-black">Message</label>
-                    <textarea name="message" rows={5} required className="w-full bg-[#0B0F14] border border-[#1F2937] rounded-2xl px-8 py-5 focus:outline-none focus:border-[#C9A24D] resize-none" placeholder="How can we assist?"></textarea>
+                    <textarea name="message" rows={5} required className="w-full bg-[#0B0F14] border border-[#1F2937] rounded-2xl px-8 py-5 focus:outline-none focus:border-[#C9A24D] resize-none"></textarea>
                   </div>
 
                   <button

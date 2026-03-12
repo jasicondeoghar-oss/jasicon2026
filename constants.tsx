@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { FacultyMember, CommitteeMember, ProgramSession, Workshop, ExtendedCommitteeSection } from './types';
 
@@ -28,35 +27,41 @@ export const COMMITTEE: CommitteeMember[] = [
   { id: 'c3', name: 'Dr. Vijay Kumar', role: 'Organising Treasurer', imageUrl: getAssetPath('/assets/Vijay_kumar.png') },
   { id: 'c4', name: 'Dr. Rajiv Kr. Pandey', role: 'Gen. & Lap. Surgeon (Deoghar)', imageUrl: getAssetPath('/assets/Dr_Rajiv_Kumar_PandeyCircle.png') },
   { id: 'c7', name: 'Dr. Abhinav Prakash Arya', role: 'Assoc. Prof., AIIMS Deoghar', imageUrl: getAssetPath('/assets/Dr_Abhinav Prakash.png') },
-  { id: 'c8', name: 'Dr. R. P. Srivastava', role: 'Patron', imageUrl: getAssetPath('/assets/Dr r p srivastava  patron.png') },
   { id: 'c9', name: 'Dr. Chitranjan Pankaj', role: 'Fund Raising Committee', imageUrl: getAssetPath('/assets/Dr_CHITRANJAN_KUMAR.png') },
   { id: 'c11', name: 'Dr. Anil Kumar', role: 'Asst. Prof., Dept. of Neurosurgery, AIIMS Deoghar', imageUrl: getAssetPath('/assets/Dr_Anil_kumar.png') },
-  { id: 'c12', name: 'Dr. Amardeep Kumar', role: 'Assoc. Prof., Dept. of Gen. Surgery, AIIMS Deoghar', imageUrl: getAssetPath('/assets/Dr_Amardeep_Kumar.png') },
+  { id: 'c12', name: 'Dr. Amardeep Kumar', role: 'Workshop Committee', imageUrl: getAssetPath('/assets/Dr_Amardeep_Kumar.png') },
   { id: 'c13', name: 'Dr. Jagjivan Murmu', role: 'Catering & Entertainment', imageUrl: getAssetPath('/assets/DR_JAGJIVAN_MURMU_JIVAN_CHHAYA CLINIC_DEOGHAR.png') },
   { id: 'c15', name: 'Dr. Ravi Kumar', role: 'Media & IT', imageUrl: getAssetPath('/assets/Dr_Ravi_Kumar.png') },
   { id: 'c17', name: 'Dr. Rajesh Ranjan', role: 'Scientific Committee', imageUrl: getAssetPath('/assets/Dr_Rajesh_Ranjan_Scientific.png') },
   { id: 'c16', name: 'Dr. Rajesh Kumar', role: 'Reception Committee', imageUrl: getAssetPath('/assets/Dr_Rajesh_Kumar_Reception.png') },
+  { id: 'c18', name: 'Dr. Kumar Mrigank Singh', role: 'Scientific Committee', imageUrl: getAssetPath('/assets/Dr_Kumar_Mrigank_Singh.png') },
 ];
 
 export const ASI_JHARKHAND: CommitteeMember[] = [
+  { id: 'aj5', name: 'Dr. R.P. Srivastava', role: 'Chief Patron', imageUrl: getAssetPath('/assets/Dr r p srivastava  patron.png') },
+  { id: 'aj9', name: 'Dr. Vijay Kumar', role: 'EC Member ASI', imageUrl: getAssetPath('/assets/Dr_vijay_kumar_ec_member.png') },
+  { id: 'aj6', name: 'Dr. Md. Azad', role: 'EC member ASI', imageUrl: getAssetPath('/assets/Dr_Md_Azad_Ec_MEMBER.png') },
   { id: 'aj1', name: 'Dr. Sanjay Kumar', role: 'Chairman, ASI (Jharkhand)', imageUrl: getAssetPath('/assets/Dr sanjay kumar Chairman  ASI Jharkhand State Chapter-modified.png') },
   { id: 'aj2', name: 'Dr. Rajesh Kumar Singh', role: 'Secretary, ASI (Jharkhand)', imageUrl: getAssetPath('/assets/Dr_Rajesh_Kumar_Singh.png') },
-  { id: 'aj3', name: 'Dr. Ajay Kumar', role: 'Joint Secretary ASI (Jharkhand)', imageUrl: getAssetPath('/assets/Dr ajay  kumar  joint secretary.png') },
   { id: 'aj8', name: 'Dr. Sandip Kr Agrawal', role: 'Past Chairman, ASI (Jharkhand)', imageUrl: getAssetPath('/assets/Dr_sandip_kr_Agrawal_Past_Chairman.png') },
-  { id: 'aj7', name: 'Dr. Nishant Singh', role: 'Joint Secretary ASI (Jharkhand)', imageUrl: getAssetPath('/assets/Dr_Nishant_Singh_Joint_Secretary_ASI_Jharkhand.png') },
   { id: 'aj4', name: 'Dr. B. N. Prasad', role: 'Treasurer, ASI (Jharkhand)', imageUrl: getAssetPath('/assets/Dr B N prasad  Treasurer.png') },
-  { id: 'aj5', name: 'Dr. R.P. Srivastava', role: 'Chief Patron', imageUrl: getAssetPath('/assets/Dr r p srivastava  patron.png') },
+  { id: 'aj7', name: 'Dr. Kumar Nishant Singh', role: 'Joint Secretary ASI (Jharkhand)', imageUrl: getAssetPath('/assets/Dr_Nishant_Singh_Joint_Secretary_ASI_Jharkhand.png') },
+  { id: 'aj3', name: 'Dr. Ajay Kumar', role: 'Joint Secretary ASI (Jharkhand)', imageUrl: getAssetPath('/assets/Dr ajay  kumar  joint secretary.png') },
 ];
 
 export const ASI_JHARKHAND_EXTENDED: ExtendedCommitteeSection[] = [
   {
-    title: 'E C Members ASI ( Jharkhand )',
-    members: ['Dr. Azad', 'Dr. Vijay Kumar']
+    title: 'E.C. Member, ASI (Jharkhand)',
+    members: ['Dr. Md. Azad', 'Dr. Vijay Kumar']
+  },
+  {
+    title: 'Patron',
+    members: ['Dr. N. K. Jha', 'Dr. N. M. Srivastava']
   },
   {
     title: 'Advisors -Jharkhand',
     members: [
-      'Dr. ( Prof. ) Majid Alam', 'Dr. M. S. Bhatt', 'Dr. M. P. Jha', 'Dr. N. K. Jha',
+      'Dr. ( Prof. ) Majid Alam', 'Dr. M. S. Bhatt', 'Dr. M. P. Jha',
       'Dr. D. P. Bhadani', 'Dr. Sridhar Pradhan', 'Dr. Om Prakash', 'Dr. N. K. Choudhary',
       'Dr. Shital Maluwa', 'Dr. Uday Srivastava', 'Dr. Arunima Verma'
     ]
@@ -66,18 +71,10 @@ export const ASI_JHARKHAND_EXTENDED: ExtendedCommitteeSection[] = [
 
 export const EXTENDED_COMMITTEE: ExtendedCommitteeSection[] = [
   {
-    title: 'E.C. Member, ASI (Jharkhand)',
-    members: ['Dr. Md. Azad']
-  },
-  {
-    title: 'Patron',
-    members: ['Dr. N. K. Jha', 'Dr. N. M. Srivastava']
-  },
-  {
     title: 'Workshop Committee',
     members: [
       'Dr. (Prof.) Satya Ranjan Patra', 'Dr. Niranjan Kumar', 'Dr. Abhinav Kumar',
-      'Dr. Nishit Ranjan', 'Dr. Arvind Kumar'
+      'Dr. Nishit Ranjan', 'Dr. Arvind Kumar', 'Dr. Amardeep Kumar'
     ]
   },
   {
@@ -90,11 +87,11 @@ export const EXTENDED_COMMITTEE: ExtendedCommitteeSection[] = [
   },
   {
     title: 'Reception Committee',
-    members: ['Dr. Devanand Prakash', 'Dr. Rajiv Pandey']
+    members: ['Dr. Devanand Prakash', 'Dr. Rajiv Pandey', 'Dr. Rajesh Kumar']
   },
   {
     title: 'Scientific Committee',
-    members: ['Dr. Kumar Mrigank Singh', 'Dr. Satvir', 'Dr. Ashish Kumar']
+    members: ['Dr. Rajesh Ranjan', 'Dr. Kumar Mrigank Singh', 'Dr. Satvir', 'Dr. Ashish Kumar']
   },
   {
     title: 'Souvenir Committee',
@@ -102,7 +99,11 @@ export const EXTENDED_COMMITTEE: ExtendedCommitteeSection[] = [
   },
   {
     title: 'Catering & Entertainment',
-    members: ['Dr. Vinod Kumar']
+    members: ['Dr. Vinod Kumar', 'Dr. Jagjivan Murmu']
+  },
+  {
+    title: 'Fund Rasing Committee',
+    members: ['Dr. Chitranjan Pankaj']
   },
 ];
 
