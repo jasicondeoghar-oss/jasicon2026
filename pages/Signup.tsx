@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Mail, Lock, User, ArrowRight, Loader, Eye, EyeOff } from 'lucide-react';
 
@@ -11,15 +11,18 @@ const Signup: React.FC = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [searchParams] = useSearchParams();
 
     const { signup, googleLogin, user } = useAuth();
     const navigate = useNavigate();
 
     React.useEffect(() => {
         if (user) {
-            navigate('/dashboard', { replace: true });
+            const rawRedirect = searchParams.get('redirect') || '/dashboard';
+            const redirectPath = rawRedirect.startsWith('/') ? rawRedirect : `/${rawRedirect}`;
+            navigate(redirectPath, { replace: true });
         }
-    }, [user, navigate]);
+    }, [user, navigate, searchParams]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -31,7 +34,6 @@ const Signup: React.FC = () => {
             setError('');
             setLoading(true);
             await signup(email, password, name);
-            navigate('/dashboard');
         } catch (err: any) {
             setError(err.message || 'Failed to create an account');
         } finally {
@@ -44,7 +46,6 @@ const Signup: React.FC = () => {
             setError('');
             setLoading(true);
             await googleLogin();
-            navigate('/dashboard');
         } catch (err: any) {
             setError('Failed to sign up with Google.');
             console.error(err);
@@ -92,7 +93,6 @@ const Signup: React.FC = () => {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 className="w-full bg-[#0B0F14] border border-[#1F2937] rounded-xl py-2.5 pl-10 pr-4 text-white focus:outline-none focus:border-[#C9A24D] transition-colors"
-                                placeholder="Dr. John Doe"
                             />
                         </div>
                     </div>
@@ -106,7 +106,6 @@ const Signup: React.FC = () => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 className="w-full bg-[#0B0F14] border border-[#1F2937] rounded-xl py-2.5 pl-10 pr-4 text-white focus:outline-none focus:border-[#C9A24D] transition-colors"
-                                placeholder="faculty@example.com"
                             />
                         </div>
                     </div>
@@ -120,7 +119,6 @@ const Signup: React.FC = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 className="w-full bg-[#0B0F14] border border-[#1F2937] rounded-xl py-2.5 pl-10 pr-10 text-white focus:outline-none focus:border-[#C9A24D] transition-colors"
-                                placeholder="••••••••"
                             />
                             <button
                                 type="button"

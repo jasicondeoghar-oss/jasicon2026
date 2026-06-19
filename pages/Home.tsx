@@ -107,12 +107,12 @@ const Home: React.FC = () => {
               25th JASICON <span className="text-[#C9A24D]">2026</span>
             </h1>
             <p className="text-base sm:text-2xl md:text-5xl text-[#E6EAF0] font-light italic serif tracking-tight opacity-90 animate-blur-fade">
-              Advancing Clinical Excellence Together
+              Refinement of Sushruta Skill from the Land of Lord Shiva.
             </p>
           </div>
 
           <p className="max-w-xl text-[12px] sm:text-lg md:text-xl text-[#E6EAF0]/90 mt-6 md:mt-8 mb-10 md:mb-12 mx-auto lg:mx-0 leading-relaxed animate-blur-fade font-medium">
-            Join the convergence of medical innovation and cultural heritage in Baidyanath Dham. Secure your place at India's most prestigious forum.
+            Join the convergence of surgical innovation and cultural heritage in Baidyanath Dham. Secure your place at India's most prestigious forum.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 md:gap-4 animate-blur-fade">

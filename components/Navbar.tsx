@@ -52,6 +52,8 @@ const Navbar: React.FC = () => {
     navigate('/');
   };
 
+  const isRegistered = user?.registrationStatus === 'completed' || user?.registrationStatus === 'approved';
+
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
@@ -66,7 +68,7 @@ const Navbar: React.FC = () => {
     },
     { name: 'Program', path: '/program' },
     { name: 'Gallery', path: '/gallery' },
-    { name: 'Registration', path: '/registration' },
+    ...(!isRegistered ? [{ name: 'Registration', path: '/registration' }] : []),
     { name: 'Contact', path: '/contact' },
   ];
 

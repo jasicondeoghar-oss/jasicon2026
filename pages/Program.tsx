@@ -18,6 +18,11 @@ const Program: React.FC = () => {
         <h2 className="text-3xl md:text-5xl font-bold serif text-[#E6EAF0] mb-12">Programs</h2>
         <div className="space-y-12 max-w-3xl">
           <div className="flex flex-col items-center">
+            <span className="text-[#C8A14D] font-bold text-xl md:text-2xl mb-2">31st September 2026</span>
+            <span className="text-[#E6EAF0] text-lg md:text-2xl font-medium">Paper and Poster Presentations Submission</span>
+          </div>
+
+          <div className="flex flex-col items-center">
             <span className="text-[#C8A14D] font-bold text-xl md:text-2xl mb-2">20th November 2026</span>
             <span className="text-[#E6EAF0] text-lg md:text-2xl font-medium">Workshop</span>
           </div>

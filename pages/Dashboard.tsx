@@ -15,23 +15,31 @@ const Dashboard: React.FC = () => {
   const passRef = useRef<HTMLDivElement>(null);
   const [isDownloading, setIsDownloading] = useState(false);
   const [localDetails, setLocalDetails] = useState<any>(null);
+  const [internalLoading, setInternalLoading] = useState(false);
   const justRegistered = searchParams.get('registered') === 'true';
 
   // Fallback check: If AuthContext says not registered, check Firestore directly
   useEffect(() => {
     const checkRegistration = async () => {
-      if (user && user.registrationStatus !== 'completed' && !localDetails) {
+      if (user && user.registrationStatus === 'none' && !localDetails) {
         try {
+          setInternalLoading(true);
+          // Wait a brief moment for profile propagation if it was just created
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          
           const docRef = doc(db, 'registrations', user.uid);
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
             const data = docSnap.data();
-            if (data.registrationStatus === 'completed') {
+            if (data.registrationStatus === 'completed' || data.registrationStatus === 'pending' || data.registrationStatus === 'approved') {
               setLocalDetails(data);
             }
           }
         } catch (e) {
           console.error("Dashboard fallback check failed", e);
+          // Silent fail is okay as it's a fallback, but we could retry once
+        } finally {
+          setInternalLoading(false);
         }
       }
     };
@@ -41,7 +49,18 @@ const Dashboard: React.FC = () => {
 
   if (!user) return <Navigate to="/login" />;
 
-  const isRegistered = user.registrationStatus === 'completed' || !!localDetails;
+  if (internalLoading) {
+    return (
+      <div className="min-h-[60vh] flex flex-col items-center justify-center text-[#C9A24D]">
+        <Loader2 className="animate-spin mb-4" size={40} />
+        <p className="text-[10px] uppercase font-bold tracking-[0.3em] opacity-80">Synchronizing Profile...</p>
+      </div>
+    );
+  }
+
+  const isRegistered = user.registrationStatus === 'completed' || user.registrationStatus === 'approved' || !!(localDetails && (localDetails.registrationStatus === 'completed' || localDetails.registrationStatus === 'approved'));
+  const isPending = user.registrationStatus === 'pending' || !!(localDetails && localDetails.registrationStatus === 'pending');
+  const isRejected = user.registrationStatus === 'rejected' || !!(localDetails && localDetails.registrationStatus === 'rejected');
   const isAdmin = user.role === 'admin';
   const delegateId = `JAS26-10${user.uid.slice(-3)}`;
   const details = user.regDetails || localDetails;
@@ -96,12 +115,21 @@ const Dashboard: React.FC = () => {
           <p className="text-[#9AA4B2] mt-2 italic">Welcome back, {user.displayName}</p>
         </div>
         <div className="flex space-x-4">
-          {!isAdmin && (
+          {!isAdmin && !isRegistered && !isPending && (
+            <Link
+              to="/registration?start=true"
+              className="bg-[#C9A24D] text-[#0B0F14] px-6 py-3 rounded-full font-bold flex items-center space-x-2 hover:scale-105 transition-all border border-[#1F2937]"
+            >
+              <span>Complete Registration</span>
+              <ArrowRight size={18} />
+            </Link>
+          )}
+          {isPending && (
             <Link
               to="/registration"
-              className={`${isRegistered ? 'bg-white/5 text-[#E6EAF0]' : 'bg-[#C9A24D] text-[#0B0F14]'} px-6 py-3 rounded-full font-bold flex items-center space-x-2 hover:scale-105 transition-all border border-[#1F2937]`}
+              className="bg-white/5 text-[#E6EAF0] px-6 py-3 rounded-full font-bold flex items-center space-x-2 hover:scale-105 transition-all border border-[#1F2937]"
             >
-              <span>{isRegistered ? 'Registration Details' : 'Complete Registration'}</span>
+              <span>View Pending Status</span>
               <ArrowRight size={18} />
             </Link>
           )}
@@ -224,6 +252,41 @@ const Dashboard: React.FC = () => {
                 </span>
               </button>
             </div>
+          ) : isPending ? (
+            <div className="bg-yellow-500/5 border border-yellow-500/20 p-10 rounded-[40px] flex flex-col md:flex-row items-center justify-between gap-8 animate-blur-fade">
+              <div>
+                <span className="text-[10px] uppercase tracking-[0.3em] text-yellow-500 font-black">Verification in Progress</span>
+                <h3 className="text-3xl font-bold serif mt-3">Awaiting Approval</h3>
+                <p className="text-sm text-[#9AA4B2] mt-2 max-w-sm">Your payment details have been submitted. Our team will verify your transaction within 48 hours.</p>
+              </div>
+              <Link to="/registration" className="bg-white/5 text-[#E6EAF0] px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white hover:text-[#0B0F14] transition-all border border-[#1F2937] shrink-0">
+                View Status
+              </Link>
+            </div>
+          ) : isAdmin ? (
+            <div className="bg-[#C9A24D]/10 border border-[#C9A24D]/20 p-10 rounded-[40px] flex flex-col md:flex-row items-center justify-between gap-8 animate-blur-fade">
+              <div>
+                <span className="text-[10px] uppercase tracking-[0.3em] text-[#C9A24D] font-black">Authorized Access</span>
+                <h3 className="text-3xl font-bold serif mt-3">Administrator Privileges</h3>
+                <p className="text-sm text-[#9AA4B2] mt-2 max-w-sm">You have full access to management tools and conference oversight.</p>
+              </div>
+              <Link to="/admin" className="bg-[#C9A24D] text-[#0B0F14] px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white transition-all shadow-xl shrink-0">
+                Manage Conference
+              </Link>
+            </div>
+          ) : isRejected ? (
+            <div className="bg-red-500/5 border border-red-500/20 p-10 rounded-[40px] flex flex-col md:flex-row items-center justify-between gap-8 animate-blur-fade">
+              <div>
+                <span className="text-[10px] uppercase tracking-[0.3em] text-red-500 font-black">Verification Failed</span>
+                <h3 className="text-3xl font-bold serif mt-3">Registration Rejected</h3>
+                <p className="text-sm text-[#E6EAF0] mt-4 font-bold leading-relaxed max-w-sm">
+                  Our team have checked your payment details and found invalid, requesting you to register again.
+                </p>
+              </div>
+              <Link to="/registration?start=true" className="bg-red-500 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white hover:text-red-500 transition-all shadow-xl shrink-0">
+                Register Again
+              </Link>
+            </div>
           ) : !isRegistered ? (
             <div className="bg-red-500/5 border border-red-500/20 p-10 rounded-[40px] flex flex-col md:flex-row items-center justify-between gap-8">
               <div>
@@ -233,17 +296,6 @@ const Dashboard: React.FC = () => {
               </div>
               <Link to="/registration?start=true" className="bg-red-500 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white hover:text-red-500 transition-all shadow-xl shrink-0">
                 Finish Now
-              </Link>
-            </div>
-          ) : isAdmin && !isRegistered ? (
-            <div className="bg-[#C9A24D]/10 border border-[#C9A24D]/20 p-10 rounded-[40px] flex flex-col md:flex-row items-center justify-between gap-8 animate-blur-fade">
-              <div>
-                <span className="text-[10px] uppercase tracking-[0.3em] text-[#C9A24D] font-black">Authorized Access</span>
-                <h3 className="text-3xl font-bold serif mt-3">Administrator Privileges</h3>
-                <p className="text-sm text-[#9AA4B2] mt-2 max-w-sm">You have full access to management tools and conference oversight.</p>
-              </div>
-              <Link to="/admin" className="bg-[#C9A24D] text-[#0B0F14] px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white transition-all shadow-xl shrink-0">
-                Manage Conference
               </Link>
             </div>
           ) : null}

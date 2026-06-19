@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -35,7 +35,12 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   const { user, loading } = useAuth();
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center bg-[#0B0F14] text-[#C9A24D]">Loading...</div>;
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#0B0F14] text-[#C9A24D]">
+        <div className="w-16 h-16 border-4 border-[#C9A24D] border-t-transparent rounded-full animate-spin mb-4"></div>
+        <div className="text-xl font-medium serif animate-pulse">Accessing Secure Hub...</div>
+      </div>
+    );
   }
 
   if (!user) {
@@ -83,6 +88,7 @@ const App: React.FC = () => {
               <Route path="/terms" element={<Legal type="terms" />} />
               <Route path="/refund" element={<Legal type="refund" />} />
               <Route path="/shipping" element={<Legal type="shipping" />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </main>
           <Footer />

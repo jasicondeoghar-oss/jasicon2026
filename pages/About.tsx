@@ -79,7 +79,7 @@ const About: React.FC = () => {
               </div>
               <h2 className="text-lg md:text-xl font-bold serif text-[#C9A24D] uppercase tracking-widest mb-8 border-b border-[#1F2937] pb-4">From the Organising Chairman's Desk</h2>
               <div className="space-y-6 text-[#9AA4B2] text-sm md:text-base leading-relaxed italic">
-                <p>In 2025 at Jamshedpur when I was hinted to hold a conference at Deoghar, the idea seemed to be an impossible task. But after repeated suggestion and encouragement by colleagues and assurance of consistent supervision by the senior master managers, I heeded to suggestions. At the outset it appeared to be mammoth challenge, a herculean task, but with time, things started to settle.</p>
+                <p>In 2025 at Jamshedpur when I was hinted to hold a conference at Deoghar, the idea seemed to be a difficult task. But after repeated suggestion and encouragement by colleagues and assurance of consistent supervision by the senior master managers, I heeded to suggestions. At the outset it appeared to be mammoth challenge, a herculean task, but with time, things started to settle.</p>
                 <p>Now, it is a pride and ultimate privilege for me to welcome you all and your family on the occasion of 25th JASICON-2026 at holy city Deoghar. This conference assumes great significance in the context of knowledge expansion in post-globalization scenario. To keep in touch with the latest development in the field of surgery, we have arranged workshop, symposium and CME's.</p>
                 <p>We have arranged your accommodation in the best possible places to suit your choice and I hope all of you will enjoy the comfortable stay.</p>
                 <div className="pt-8 text-[#E6EAF0] not-italic">

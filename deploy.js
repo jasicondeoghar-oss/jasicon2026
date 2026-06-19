@@ -16,7 +16,8 @@ publish('dist', {
     user: {
         name: 'testdigixea',
         email: 'testdigixea@users.noreply.github.com'
-    }
+    },
+    message: `Deploying conference updates: ${new Date().toISOString()}`
 }, (err) => {
     if (err) {
         console.error('Deployment failed:', err);

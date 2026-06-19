@@ -2,8 +2,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const Footer: React.FC = () => {
+  const { user } = useAuth();
+  const isRegistered = user?.registrationStatus === 'completed' || user?.registrationStatus === 'approved';
+
   return (
     <footer className="bg-[#121826] border-t border-[#1F2937] pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,7 +42,7 @@ const Footer: React.FC = () => {
             <h4 className="text-[#E6EAF0] font-semibold mb-6 uppercase tracking-wider text-sm">Quick Links</h4>
             <ul className="space-y-3 text-[#9AA4B2] text-sm">
               <li><Link to="/program" className="hover:text-[#C9A24D]">Scientific Program</Link></li>
-              <li><Link to="/registration" className="hover:text-[#C9A24D]">Registration Guidelines</Link></li>
+              {!isRegistered && <li><Link to="/registration" className="hover:text-[#C9A24D]">Registration Guidelines</Link></li>}
               <li><Link to="/committee/organizing" className="hover:text-[#C9A24D]">Organizing Committee</Link></li>
               <li><Link to="/contact" className="hover:text-[#C9A24D]">Exhibition & Sponsorship</Link></li>
             </ul>

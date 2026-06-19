@@ -22,7 +22,8 @@ const Login: React.FC = () => {
 
   React.useEffect(() => {
     if (user) {
-      const redirectPath = searchParams.get('redirect') || '/dashboard';
+      const rawRedirect = searchParams.get('redirect') || '/dashboard';
+      const redirectPath = rawRedirect.startsWith('/') ? rawRedirect : `/${rawRedirect}`;
       navigate(redirectPath, { replace: true });
     }
   }, [user, navigate, searchParams]);
@@ -37,9 +38,6 @@ const Login: React.FC = () => {
       setError('');
       setLoading(true);
       await login(email, password);
-
-      const redirectPath = searchParams.get('redirect') || '/dashboard';
-      navigate(redirectPath, { replace: true });
     } catch (err: any) {
       setError('Failed to sign in. Please check your credentials.');
       console.error(err);
@@ -53,8 +51,6 @@ const Login: React.FC = () => {
       setError('');
       setLoading(true);
       await googleLogin();
-      const redirectPath = searchParams.get('redirect') || '/dashboard';
-      navigate(redirectPath, { replace: true });
     } catch (err: any) {
       setError('Failed to sign in with Google.');
       console.error(err);
@@ -124,7 +120,6 @@ const Login: React.FC = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-[#0B0F14]/50 border border-[#1F2937] rounded-xl pl-12 pr-4 py-3 focus:outline-none focus:border-[#C9A24D] transition-all text-sm text-white"
-                placeholder="name@example.com"
                 required
               />
             </div>
@@ -139,7 +134,6 @@ const Login: React.FC = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full bg-[#0B0F14]/50 border border-[#1F2937] rounded-xl pl-12 pr-12 py-3 focus:outline-none focus:border-[#C9A24D] transition-all text-sm text-white"
-                placeholder="••••••••"
                 required
               />
               <button
@@ -215,7 +209,6 @@ const Login: React.FC = () => {
                     value={resetEmail}
                     onChange={(e) => setResetEmail(e.target.value)}
                     className="w-full bg-[#0B0F14] border border-[#1C2533] rounded-xl pl-12 pr-4 py-3 focus:outline-none focus:border-[#C9A24D] transition-all text-sm text-white"
-                    placeholder="name@example.com"
                     required
                   />
                 </div>

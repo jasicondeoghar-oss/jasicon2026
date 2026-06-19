@@ -10,11 +10,11 @@ import {
     signInWithPopup,
     sendPasswordResetEmail
 } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, collection, query, where, orderBy, limit, getDocs } from 'firebase/firestore';
 import { auth, googleProvider, db } from '../firebase';
 import { User } from '../types';
 import { ADMIN_EMAILS } from '../constants';
-import { saveRegistration } from '../services/db';
+import { saveRegistration, getLatestRegistrationSubmission, createUserProfile } from '../services/db';
 
 interface AuthContextType {
     user: User | null;
@@ -46,7 +46,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 let appUser: User = {
                     uid: firebaseUser.uid,
                     email: firebaseUser.email || '',
-                    displayName: firebaseUser.displayName || 'User',
+                    displayName: firebaseUser.displayName || '',
                     role: ADMIN_EMAILS.includes(firebaseUser.email || '') ? 'admin' : 'user',
                     registrationStatus: 'none'
                 };
@@ -58,12 +58,43 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
                     if (docSnap.exists()) {
                         const data = docSnap.data();
-                        if (data.registrationStatus === 'completed') {
+                        
+                        // If Auth displayName is missing, try to get it from registrations
+                        if (!appUser.displayName && data.fullName) {
+                            appUser.displayName = data.fullName;
+                        }
+
+                        if (data.registrationStatus === 'completed' || data.registrationStatus === 'pending' || data.registrationStatus === 'approved' || data.registrationStatus === 'rejected') {
                             appUser = {
                                 ...appUser,
-                                registrationStatus: 'completed',
+                                registrationStatus: data.registrationStatus as any,
                                 regDetails: data as any
                             };
+                        }
+                    }
+
+                    // Also check for latest submission in the new collection
+                    if (appUser.registrationStatus === 'none') {
+                        const latestSub = await getLatestRegistrationSubmission(firebaseUser.uid) as any;
+                        if (latestSub) {
+                            appUser = {
+                                ...appUser,
+                                registrationStatus: latestSub.registrationStatus as any,
+                                regDetails: latestSub as any
+                            };
+                        }
+                    }
+                    
+                    // Also fetch from 'users' collection for the core profile name
+                    const userProfileRef = doc(db, 'users', firebaseUser.uid);
+                    const userProfileSnap = await getDoc(userProfileRef);
+                    if (userProfileSnap.exists()) {
+                        const profileData = userProfileSnap.data();
+                        if (!appUser.displayName && profileData.displayName) {
+                            appUser.displayName = profileData.displayName;
+                        }
+                        if (profileData.role) {
+                            appUser.role = profileData.role as any;
                         }
                     }
                 } catch (error) {
@@ -81,20 +112,36 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }, []);
 
     const login = async (email: string, password: string) => {
+        setLoading(true);
         await signInWithEmailAndPassword(auth, email, password);
     };
 
     const googleLogin = async () => {
-        await signInWithPopup(auth, googleProvider);
+        setLoading(true);
+        const userCredential = await signInWithPopup(auth, googleProvider);
+        if (userCredential.user) {
+            await createUserProfile(userCredential.user.uid, {
+                email: userCredential.user.email || '',
+                displayName: userCredential.user.displayName || 'User'
+            });
+        }
     };
 
+
     const signup = async (email: string, password: string, name: string) => {
+        setLoading(true);
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(userCredential.user, {
             displayName: name
         });
-        // Force update local state if needed, but onAuthStateChanged usually handles it
+        
+        // Create user profile in Firestore
+        await createUserProfile(userCredential.user.uid, {
+            email: email,
+            displayName: name
+        });
     };
+
 
     const logout = async () => {
         await signOut(auth);
@@ -105,23 +152,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     const completeRegistration = async (data: any) => {
-        if (!user) return;
+        if (!user) {
+            console.error("completeRegistration: No user found in state");
+            return;
+        }
         try {
-            // Ensure email is included, falling back to auth user email if not in data
             const registrationData = {
                 ...data,
                 email: data.email || user.email || ''
             };
             await saveRegistration(user.uid, registrationData);
-            // Update local state
+            
+            // Update local state to pending with full details
             setUser(prev => prev ? ({
                 ...prev,
-                registrationStatus: 'completed',
-                regDetails: data
+                registrationStatus: 'pending' as any,
+                regDetails: {
+                    ...registrationData,
+                    registrationStatus: 'pending'
+                }
             }) : null);
-        } catch (error) {
-            console.error("Failed to complete registration", error);
-            throw error;
+        } catch (error: any) {
+            console.error("Failed to complete registration flow:", error);
+            // Provide more info in the error message if possible
+            const errorMsg = error.message || "Unknown Firestore error";
+            throw new Error(`Submission failed: ${errorMsg}`);
         }
     };
 

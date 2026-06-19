@@ -4,7 +4,7 @@ export interface User {
   email: string;
   displayName: string;
   role: 'user' | 'admin';
-  registrationStatus?: 'pending' | 'completed' | 'none';
+  registrationStatus?: 'pending' | 'approved' | 'completed' | 'none' | 'rejected';
   regDetails?: {
     fullName: string;
     age: string;
@@ -14,6 +14,8 @@ export interface User {
     medicalRegNo: string;
     category: string;
     selectedWorkshops: string[];
+    transactionId?: string;
+    registrationStatus?: string;
   };
 }
 
@@ -67,11 +69,12 @@ export interface RegistrationData {
   category: string;
   workshops: string[];
   totalAmount: number;
-  paymentStatus: 'pending' | 'paid';
+  paymentStatus: 'pending' | 'paid' | 'approved' | 'rejected';
+  transactionId?: string;
 }
 
 export interface ExtendedCommitteeSection {
   title: string;
-  members: string[];
+  members?: string[];
   membersWithPhotos?: { name: string; imageUrl: string; role?: string }[];
 }

@@ -53,12 +53,112 @@ const Gallery: React.FC = () => {
                     </p>
                 </div>
 
+                {/* JASICON Recent Meet 2026 Section */}
+                <div className="mb-24 animate-blur-fade">
+                    <div className="flex items-center gap-4 mb-10 border-b border-[#C9A24D]/20 pb-6">
+                        <div className="w-2 h-10 bg-[#C9A24D] rounded-full"></div>
+                        <h2 className="text-2xl sm:text-4xl font-bold serif text-[#E6EAF0]">JASICON Recent Meet 2026</h2>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                        {[
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.53.54 (2).jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.53.56.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.53.56 (1).jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.53.57.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.53.57 (1).jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.53.58.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.53.59.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.54.00.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.54.01.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.54.01 (1).jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.54.01 (2).jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.54.02.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.54.02 (1).jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.54.04.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.54.05.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.54.06.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.54.06 (1).jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.54.07.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.54.07 (1).jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.54.07 (2).jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.54.08.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.54.08 (1).jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.54.14.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.55.15.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.55.32.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.55.55.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.56.22.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.56.35.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.56.46.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.56.58.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.57.14.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.57.33.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.57.43.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.58.02.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.58.33.jpeg',
+                            '/assets/photos/WhatsApp Image 2026-06-03 at 20.58.59.jpeg',
+                        ].map((url, index) => (
+                            <div
+                                key={`recent-${index}`}
+                                className="group relative overflow-hidden rounded-[32px] bg-[#121826] border border-[#1F2937] aspect-[4/3] animate-scale-in"
+                                style={{ animationDelay: `${index * 60}ms` }}
+                            >
+                                <img
+                                    src={getAssetPath(url)}
+                                    alt={`JASICON Recent Meet 2026 - Photo ${index + 1}`}
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F14] via-[#0B0F14]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center p-6">
+                                    <h3 className="text-[#C9A24D] font-black text-2xl uppercase tracking-[0.3em] text-center">Recent Meet 2026</h3>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* JASICON 2026 Pharma Meet Section */}
+                <div className="mb-24 animate-blur-fade">
+                    <div className="flex items-center gap-4 mb-10 border-b border-[#C9A24D]/20 pb-6">
+                        <div className="w-2 h-10 bg-[#C9A24D] rounded-full"></div>
+                        <h2 className="text-2xl sm:text-4xl font-bold serif text-[#E6EAF0]">JASICON 2026 Pharma Meet, Deoghar</h2>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                        {[
+                            '/assets/PharmaMeet/WhatsApp Image 2026-04-09 at 23.49.59.jpeg',
+                            '/assets/PharmaMeet/WhatsApp Image 2026-04-09 at 23.50.00.jpeg',
+                            '/assets/PharmaMeet/WhatsApp Image 2026-04-09 at 23.50.01 (1).jpeg',
+                            '/assets/PharmaMeet/WhatsApp Image 2026-04-09 at 23.50.01 (2).jpeg',
+                            '/assets/PharmaMeet/WhatsApp Image 2026-04-09 at 23.50.01.jpeg',
+                            '/assets/PharmaMeet/WhatsApp Image 2026-04-09 at 23.50.02.jpeg'
+                        ].map((url, index) => (
+                            <div
+                                key={`pharma-${index}`}
+                                className="group relative overflow-hidden rounded-[32px] bg-[#121826] border border-[#1F2937] aspect-[4/3] animate-scale-in"
+                                style={{ animationDelay: `${index * 100}ms` }}
+                            >
+                                <img
+                                    src={getAssetPath(url)}
+                                    alt="JASICON 2026 Pharma Meet"
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F14] via-[#0B0F14]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center p-6">
+                                    <h3 className="text-[#C9A24D] font-black text-2xl uppercase tracking-[0.3em] text-center">Pharma Meet 2026</h3>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="flex items-center gap-4 mb-10 border-b border-[#C9A24D]/20 pb-6">
+                    <div className="w-2 h-10 bg-[#C9A24D] rounded-full"></div>
+                    <h2 className="text-2xl sm:text-4xl font-bold serif text-[#E6EAF0]">Past Events</h2>
+                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     {images.map((image, index) => (
                         <div
                             key={image.id}
                             className="group relative overflow-hidden rounded-2xl bg-[#121826] border border-[#1F2937] aspect-[4/3] animate-fade-in-up"
-                            style={{ animationDelay: `${index * 100}ms` }}
+                            style={{ animationDelay: `${index * 50}ms` }}
                         >
                             <img
                                 src={image.url}
@@ -66,7 +166,7 @@ const Gallery: React.FC = () => {
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F14] via-[#0B0F14]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center p-6">
-                                <h3 className="text-[#C9A24D] font-black text-3xl uppercase tracking-[0.3em] animate-blur-fade">JASICON</h3>
+                                <h3 className="text-[#9AA4B2] font-black text-xl uppercase tracking-[0.3em] font-serif">JASICON</h3>
                             </div>
                         </div>
                     ))}

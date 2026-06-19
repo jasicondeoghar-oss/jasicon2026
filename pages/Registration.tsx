@@ -2,10 +2,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Check, CreditCard, User, Briefcase, Settings, AlertCircle, Info, Loader2, Hospital, Microscope, Download, FileText, ChevronDown } from 'lucide-react';
-import { WORKSHOPS } from '../constants';
+import { Check, CreditCard, User, Briefcase, Settings, AlertCircle, Info, Loader2, Hospital, Microscope, Download, FileText, ChevronDown, Clock, QrCode } from 'lucide-react';
+import { WORKSHOPS, getAssetPath } from '../constants';
 import { toPng } from 'html-to-image';
 import { jsPDF } from 'jspdf';
+import qrImage from '../src/assets/qr_payment.jpeg';
 
 const Registration: React.FC = () => {
   const { user, completeRegistration } = useAuth();
@@ -19,7 +20,7 @@ const Registration: React.FC = () => {
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState({
-    fullName: user?.displayName || '',
+    fullName: (user?.displayName === 'User' ? '' : user?.displayName) || '',
     email: user?.email || '',
     age: '',
     mobile: '+91',
@@ -27,7 +28,8 @@ const Registration: React.FC = () => {
     designation: '',
     medicalRegNo: '',
     category: 'Faculty',
-    selectedWorkshops: [] as string[]
+    selectedWorkshops: [] as string[],
+    transactionId: ''
   });
 
   const navigateToDashboard = () => {
@@ -46,7 +48,7 @@ const Registration: React.FC = () => {
     if (user && !user.regDetails) {
       setFormData(prev => ({
         ...prev,
-        fullName: user.displayName || prev.fullName,
+        fullName: (user.displayName === 'User' ? '' : user.displayName) || prev.fullName,
         email: user.email || prev.email,
         // Ensure email is set even if user updates profile later or it was missed
         ...((user.email && !prev.email) ? { email: user.email } : {})
@@ -90,7 +92,7 @@ const Registration: React.FC = () => {
 
       const ageNum = parseInt(formData.age);
       if (!formData.age) newErrors.age = "Age is required";
-      else if (isNaN(ageNum) || ageNum < 18) newErrors.age = "Age must be at least 18";
+      else if (isNaN(ageNum) || ageNum < 18 || ageNum > 100) newErrors.age = "Age must be between 18 and 100";
 
       if (!formData.mobile || formData.mobile === '+91') newErrors.mobile = "Mobile number is required";
       else if (formData.mobile.length !== 13) newErrors.mobile = "Mobile number must be exactly 10 digits";
@@ -118,11 +120,8 @@ const Registration: React.FC = () => {
 
   const handleNext = () => {
     if (!validateStep()) {
-      const firstErrorField = Object.keys(errors)[0];
-      console.log("Validation failed", errors);
       return;
     }
-
     setIsProcessing(true);
     setTimeout(() => {
       setStep(prev => Math.min(prev + 1, 4));
@@ -179,6 +178,41 @@ const Registration: React.FC = () => {
       }
     }
   };
+
+  // ── PENDING SCREEN ──
+  if ((user?.registrationStatus as any) === 'pending' && !showForm) {
+    return (
+      <div className="max-w-2xl mx-auto px-6 py-16 md:py-24 text-center">
+        <div className="w-20 h-20 bg-[#C9A24D]/10 text-[#C9A24D] rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl">
+          <Clock size={40} />
+        </div>
+        <h1 className="text-3xl sm:text-5xl font-bold serif text-white mb-4">Awaiting Approval</h1>
+        <p className="text-[#9AA4B2] mb-6 text-sm leading-relaxed">
+          Your payment has been submitted. Our team is verifying your transaction and will confirm your registration within <strong className="text-[#C9A24D]">48 hours</strong>.
+        </p>
+        <div className="bg-[#121826] border border-[#1F2937] rounded-2xl p-6 text-left space-y-3 mb-8">
+          <div className="flex justify-between text-sm">
+            <span className="text-[#9AA4B2]">Name</span>
+            <span className="text-white font-medium">{user?.regDetails?.fullName}</span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-[#9AA4B2]">Category</span>
+            <span className="text-[#C9A24D] font-bold">{user?.regDetails?.category}</span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-[#9AA4B2]">Transaction ID</span>
+            <span className="text-white font-mono">{user?.regDetails?.transactionId}</span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-[#9AA4B2]">Status</span>
+            <span className="bg-yellow-500/10 text-yellow-400 px-3 py-1 rounded-full text-[10px] font-bold uppercase">Pending Approval</span>
+          </div>
+        </div>
+        <Link to="/dashboard" className="bg-[#C9A24D] text-[#0B0F14] px-10 py-4 rounded-full font-black text-xs uppercase tracking-widest hover:bg-white transition-all inline-block">Go to Dashboard</Link>
+      </div>
+    );
+  }
+
 
   const renderDetails = user?.regDetails || formData;
 
@@ -261,7 +295,7 @@ const Registration: React.FC = () => {
               <p className="text-[10px] text-[#E6EAF0] font-medium leading-relaxed mb-4 italic">
                 "Access to all scientific halls, networking hub, and gala dinner is activated."
               </p>
-              <span className="text-[8px] font-black uppercase tracking-[0.5em] text-[#9AA4B2]">Nov 20-22, 2026 • Baidyanath Dham, Deoghar</span>
+              <span className="text-[8px] font-black uppercase tracking-[0.5em] text-[#9AA4B2]">Nov 20-22, 2026 &bull; Baidyanath Dham, Deoghar</span>
             </div>
           </div>
         </div>
@@ -303,6 +337,9 @@ const Registration: React.FC = () => {
                 <p className="text-sm sm:text-lg font-bold text-white serif leading-tight mt-2">
                   Self Accommodation: Participants are requested to arrange their own accommodation.
                 </p>
+                <p className="text-sm sm:text-lg font-bold text-[#C9A24D] serif leading-tight mt-3">
+                  Your registration will be confirmed within 48 hours.
+                </p>
               </div>
             </div>
           </div>
@@ -340,7 +377,7 @@ const Registration: React.FC = () => {
 
           <div className="text-center py-6 md:py-10">
             <button
-              onClick={() => { if (!user) navigate('/login?redirect=registration&start=true'); else setShowForm(true); }}
+              onClick={() => { if (!user) navigate('/login'); else setShowForm(true); }}
               className="w-full sm:w-auto bg-[#C9A24D] text-[#0B0F14] px-12 py-5 rounded-full font-bold text-lg hover:bg-white shadow-xl transition-all transform hover:scale-105"
             >
               Begin Registration
@@ -354,7 +391,7 @@ const Registration: React.FC = () => {
               { n: 1, label: 'Profile', icon: <User size={16} /> },
               { n: 2, label: 'Scientific', icon: <Briefcase size={16} /> },
               { n: 3, label: 'Curriculum', icon: <Settings size={16} /> },
-              { n: 4, label: 'Summary', icon: <CreditCard size={16} /> },
+              { n: 4, label: 'Payment', icon: <QrCode size={16} /> },
             ].map((s) => (
               <div key={s.n} className="flex items-center space-x-3 shrink-0">
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center border-2 transition-all ${step === s.n
@@ -398,7 +435,6 @@ const Registration: React.FC = () => {
                           name="fullName"
                           value={formData.fullName}
                           onChange={handleInputChange}
-                          placeholder="Name Surname"
                           className={`w-full bg-[#0B0F14]/50 border ${errors.fullName ? 'border-red-500' : 'border-[#1F2937]'} rounded-xl px-5 py-4 focus:border-[#C9A24D] outline-none text-sm transition-all`}
                         />
                         {errors.fullName && <p className="text-[9px] text-red-500 font-bold uppercase tracking-widest">{errors.fullName}</p>}
@@ -419,9 +455,9 @@ const Registration: React.FC = () => {
                           type="number"
                           name="age"
                           min="18"
+                          max="100"
                           value={formData.age}
                           onChange={handleInputChange}
-                          placeholder="e.g. 35"
                           className={`w-full bg-[#0B0F14]/50 border ${errors.age ? 'border-red-500' : 'border-[#1F2937]'} rounded-xl px-5 py-4 focus:border-[#C9A24D] outline-none text-sm`}
                         />
                         {errors.age && <p className="text-[9px] text-red-500 font-bold uppercase tracking-widest">{errors.age}</p>}
@@ -437,7 +473,6 @@ const Registration: React.FC = () => {
                             name="mobile"
                             value={formData.mobile.slice(3)}
                             onChange={handleInputChange}
-                            placeholder="9876543210"
                             className={`flex-grow bg-[#0B0F14] border ${errors.mobile ? 'border-red-500' : 'border-[#1F2937]'} rounded-xl px-5 py-4 focus:border-[#C9A24D] outline-none text-sm transition-all`}
                           />
                         </div>
@@ -493,7 +528,6 @@ const Registration: React.FC = () => {
                             value={formData.medicalRegNo}
                             onChange={handleInputChange}
                             className={`w-full bg-[#0B0F14] border ${errors.medicalRegNo ? 'border-red-500' : 'border-[#1F2937]'} rounded-xl px-5 py-4 focus:border-[#C9A24D] outline-none text-sm`}
-                            placeholder="MCI / State Council No"
                           />
                           {errors.medicalRegNo && <p className="text-[9px] text-red-500 font-bold uppercase tracking-widest">{errors.medicalRegNo}</p>}
                         </div>
@@ -506,7 +540,6 @@ const Registration: React.FC = () => {
                             name="institution"
                             value={formData.institution}
                             onChange={handleInputChange}
-                            placeholder="e.g. AIIMS Delhi"
                             className={`w-full bg-[#0B0F14] border ${errors.institution ? 'border-red-500' : 'border-[#1F2937]'} rounded-xl px-5 py-4 focus:border-[#C9A24D] outline-none text-sm`}
                           />
                           {errors.institution && <p className="text-[9px] text-red-500 font-bold uppercase tracking-widest">{errors.institution}</p>}
@@ -521,7 +554,6 @@ const Registration: React.FC = () => {
                               name="institution"
                               value={formData.institution}
                               onChange={handleInputChange}
-                              placeholder="e.g. AIIMS Delhi"
                               className={`w-full bg-[#0B0F14] border ${errors.institution ? 'border-red-500' : 'border-[#1F2937]'} rounded-xl px-5 py-4 focus:border-[#C9A24D] outline-none text-sm`}
                             />
                             {errors.institution && <p className="text-[9px] text-red-500 font-bold uppercase tracking-widest">{errors.institution}</p>}
@@ -533,7 +565,6 @@ const Registration: React.FC = () => {
                               name="designation"
                               value={formData.designation}
                               onChange={handleInputChange}
-                              placeholder="e.g. Senior Resident"
                               className={`w-full bg-[#0B0F14] border ${errors.designation ? 'border-red-500' : 'border-[#1F2937]'} rounded-xl px-5 py-4 focus:border-[#C9A24D] outline-none text-sm`}
                             />
                             {errors.designation && <p className="text-[9px] text-red-500 font-bold uppercase tracking-widest">{errors.designation}</p>}
@@ -573,39 +604,87 @@ const Registration: React.FC = () => {
                 )}
 
                 {step === 4 && (
-                  <div className="text-center py-6 md:py-10 space-y-6 md:space-y-8 animate-blur-fade">
-                    <div className="w-20 h-20 bg-[#C9A24D]/10 text-[#C9A24D] rounded-full flex items-center justify-center mx-auto shadow-xl">
-                      <CreditCard size={32} />
+                  <div className="space-y-6 animate-blur-fade">
+                    <div className="flex items-center gap-4 mb-2">
+                      <QrCode className="text-[#C9A24D]" size={32} />
+                      <div>
+                        <h3 className="text-xl md:text-2xl font-bold serif">Payment</h3>
+                        <p className="text-[10px] uppercase tracking-widest text-[#9AA4B2]">Scan QR &amp; Enter Transaction ID</p>
+                      </div>
                     </div>
-                    <h3 className="text-2xl md:text-3xl font-bold serif">Checkout Summary</h3>
-                    <div className="max-w-xs mx-auto space-y-4 text-xs sm:text-sm font-medium">
-                      <div className="flex justify-between text-[#9AA4B2]">
-                        <span>Conference Fee ({formData.category})</span>
-                        <span>₹{formData.category === 'PG Student' ? '2,000' : '3,000'}</span>
+
+                    {/* Amount Summary */}
+                    <div className="bg-[#C9A24D]/5 border border-[#C9A24D]/20 rounded-2xl p-5 flex justify-between items-center">
+                      <div>
+                        <p className="text-[10px] font-black uppercase tracking-widest text-[#C9A24D] mb-1">Amount Payable</p>
+                        <p className="text-2xl font-bold text-white serif">₹{calculateTotal().total.toLocaleString()}</p>
+                        <p className="text-[10px] text-[#9AA4B2] mt-1">{formData.category} &bull; Incl. 18% GST</p>
                       </div>
-                      {formData.selectedWorkshops.length > 0 && (
-                        <div className="flex justify-between text-[#9AA4B2]">
-                          <span>Workshops ({formData.selectedWorkshops.length})</span>
-                          <span>
-                            ₹{formData.selectedWorkshops.reduce((acc, id) => {
-                              const w = WORKSHOPS.find(w => w.id === id);
-                              return acc + (w?.price || 0);
-                            }, 0).toLocaleString()}
-                          </span>
-                        </div>
-                      )}
-                      <div className="flex justify-between text-[#9AA4B2] pt-2 border-t border-[#1F2937]/30">
-                        <span>Subtotal</span>
-                        <span>₹{calculateTotal().subtotal.toLocaleString()}</span>
+                      <span className="text-[10px] font-black uppercase tracking-widest text-[#2EC4B6] bg-[#2EC4B6]/10 px-3 py-1 rounded-full border border-[#2EC4B6]/20">{formData.category}</span>
+                    </div>
+
+                    {/* QR Code */}
+                    <div className="flex flex-col items-center">
+                      <p className="text-[10px] font-black uppercase tracking-widest text-[#9AA4B2] mb-4">Scan with any UPI app to pay</p>
+                      <div className="bg-white p-4 rounded-2xl shadow-2xl inline-block">
+                        <img
+                          src={qrImage}
+                          alt="PayZapp QR Code"
+                          className="w-full max-w-[320px] h-auto object-contain mx-auto"
+                          onError={(e) => {
+                            // Fallback QR placeholder if image not found
+                            (e.target as HTMLImageElement).src = 'https://api.qrserver.com/v1/create-qr-code/?data=payzapp%40hdfcbank&size=200x200&color=000000&bgcolor=ffffff';
+                          }}
+                        />
+                        <a
+                          href={qrImage}
+                          download="JASICON2026_QR_Payment.jpeg"
+                          className="mt-4 bg-[#0B0F14] text-[#C9A24D] px-6 py-3 rounded-xl font-bold text-[10px] uppercase tracking-[0.2em] border border-[#C9A24D]/30 hover:bg-[#C9A24D] hover:text-[#0B0F14] transition-all flex items-center justify-center gap-2 w-full"
+                        >
+                          <Download size={14} /> Download QR Code
+                        </a>
                       </div>
-                      <div className="flex justify-between text-[#9AA4B2]">
-                        <span>GST (18%)</span>
-                        <span>₹{calculateTotal().gst.toLocaleString()}</span>
+
+                      {/* WhatsApp Notice - Moved Up */}
+                      <div className="mt-6 mb-2 p-4 bg-[#C9A24D]/10 border-2 border-[#C9A24D]/40 rounded-xl w-full max-w-[320px] text-center shadow-lg">
+                        <p className="text-[#C9A24D] font-black text-[10px] uppercase tracking-widest mb-2 flex items-center justify-center gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#C9A24D] animate-pulse"></span>
+                          IMPORTANT NOTICE
+                        </p>
+                        <p className="text-white font-bold text-sm leading-tight">
+                          After payment, send the Screenshot to WhatsApp:
+                          <br />
+                          <span className="text-xl text-[#C9A24D] mt-2 inline-block font-black tracking-tight">+91 93343 86644</span>
+                          <br />
+                          <span className="text-[10px] text-[#C9A24D] mt-2 inline-block opacity-80 uppercase tracking-widest">your registration will be confirmed within 48 hours.</span>
+                        </p>
                       </div>
-                      <div className="flex justify-between text-xl md:text-2xl font-bold text-[#C9A24D] pt-4 border-t border-[#1F2937]">
-                        <span>Total (Incl. GST)</span>
-                        <span>₹{calculateTotal().total.toLocaleString()}</span>
+
+                      <div className="flex items-center gap-3 mt-4 text-[10px] text-[#9AA4B2] uppercase tracking-widest font-bold">
+                        <span>UPI</span>
+                        <span className="text-[#1F2937]">|</span>
+                        <span>BHIM</span>
+                        <span className="text-[#1F2937]">|</span>
+                        <span>PayZapp</span>
+                        <span className="text-[#1F2937]">|</span>
+                        <span>HDFC Bank</span>
                       </div>
+                    </div>
+
+                    {/* Transaction ID */}
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-[#9AA4B2]">UPI Transaction ID / Reference Number (Optional)</label>
+                      <input
+                        type="text"
+                        name="transactionId"
+                        value={formData.transactionId}
+                        onChange={handleInputChange}
+                        className={`w-full bg-[#0B0F14] border ${errors.transactionId ? 'border-red-500' : 'border-[#1F2937]'} rounded-xl px-5 py-4 focus:border-[#C9A24D] outline-none text-sm font-mono tracking-wider transition-all`}
+                      />
+                      {errors.transactionId && <p className="text-[9px] text-red-500 font-bold uppercase tracking-widest">{errors.transactionId}</p>}
+                      <p className="text-[10px] text-[#9AA4B2] leading-relaxed">
+                        After payment, enter the 12-digit UTR / transaction reference from your UPI app if available. Your registration will be confirmed within <strong className="text-[#C9A24D]">48 hours</strong>.
+                      </p>
                     </div>
                   </div>
                 )}
@@ -623,13 +702,11 @@ const Registration: React.FC = () => {
                       setIsProcessing(true);
                       try {
                         await completeRegistration(formData);
-                        // Small delay to ensure state updates propagate
-                        setTimeout(() => navigateToDashboard(), 500);
-                      } catch (error) {
+                        setTimeout(() => navigate('/dashboard'), 500);
+                      } catch (error: any) {
                         console.error("Registration failed", error);
                         setIsProcessing(false);
-                        // Show error to user (you might want to add an error state/toast here)
-                        alert("Registration failed. Please try again.");
+                        alert(error.message || "Submission failed. Please try again.");
                       }
                     } else {
                       if (step === 1 && !formData.email) {
@@ -639,10 +716,15 @@ const Registration: React.FC = () => {
                       handleNext();
                     }
                   }}
-                  className="bg-[#C9A24D] text-[#0B0F14] px-8 md:px-12 py-4 rounded-full font-bold text-xs uppercase tracking-[0.2em] hover:bg-white shadow-xl transition-all transform active:scale-95"
+                  className="bg-[#C9A24D] text-[#0B0F14] px-8 md:px-12 py-4 rounded-full font-bold text-xs uppercase tracking-[0.2em] hover:bg-white shadow-xl transition-all transform active:scale-95 disabled:opacity-50"
                   disabled={isProcessing}
                 >
-                  {isProcessing ? <Loader2 className="animate-spin" size={20} /> : (step === 4 ? 'Confirm & Pay' : 'Next Step')}
+                  {isProcessing ? (
+                    <div className="flex items-center gap-2">
+                       <Loader2 className="animate-spin" size={16} />
+                       <span>{step === 4 ? 'Processing...' : 'Wait...'}</span>
+                    </div>
+                  ) : (step === 4 ? 'Confirm & Proceed →' : 'Next Step')}
                 </button>
               </div>
             </div>
