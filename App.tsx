@@ -54,7 +54,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 const App: React.FC = () => {
   return (
     <AuthProvider>
-      <Router>
+      <Router basename={import.meta.env.BASE_URL}>
         <ScrollToTop />
         <div className="flex flex-col min-h-screen bg-[#0B0F14] text-[#E6EAF0]">
           <Navbar />
